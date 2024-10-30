@@ -2,7 +2,7 @@
 
 PsychLib is a `WebAssembly` library that provides APIs for data analysis, especially for psychological and educational research. For use cases, please refer to my another project [PsychPen](https://github.com/LeafYeeXYZ/PsychPen).
 
-The speed for `bootstrapTest` is 2-4x faster than the `TypeScript` version `PsychLib` in [PsychPen](https://github.com/LeafYeeXYZ/PsychPen), as well as other basic math functions.
+The speed for `bootstrapTest` is 2-4x faster than the `TypeScript` version [PsychLib](https://github.com/LeafYeeXYZ/PsychLib) in [PsychPen](https://github.com/LeafYeeXYZ/PsychPen), as well as other basic math functions.
 
 ## Usage
 
