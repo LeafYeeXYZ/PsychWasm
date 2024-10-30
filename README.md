@@ -17,10 +17,17 @@ bun add psych-wasm
 ### Import
 
 ```typescript
-import { corr, mean } from 'psych-wasm'
+import { corr, mean, bootstrapTest } from 'psych-wasm'
 
 console.log(mean([1, 2, 3, 4, 5])) // 3
 console.log(corr([1, 2, 3, 4, 5], [5, 4, 3, 2, 1])) // -1
+console.log(bootstrapTest(
+  [1, 2, 3, 4, 5],
+  [123, 44, 765, 23, 1],
+  [43, 23, 12, 4, 5],
+  1000,
+  0.05
+)) // [xxx, xxx] (95% confidence interval of ab (mediation effect))
 ```
 
 ## Development
