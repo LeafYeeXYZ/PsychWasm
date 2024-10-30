@@ -145,8 +145,9 @@ function quickSort(arr: f64[], low: i32, high: i32, ascending: boolean): void {
  * @returns sorted numbers
  */
 export function sort(data: f64[], ascending: boolean = true): f64[] {
-  quickSort(data, 0, data.length - 1, ascending)
-  return data
+  const copy: f64[] = data.slice()
+  quickSort(copy, 0, data.length - 1, ascending)
+  return copy
 }
 
 /**

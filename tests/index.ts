@@ -14,7 +14,7 @@ assert.strictEqual(wasm.vari([1, 2, 3]).toFixed(PERCISION), Number(2 / 3).toFixe
 assert.strictEqual(wasm.std([1, 2, 3]).toFixed(PERCISION), Number(Math.sqrt(2 / 3)).toFixed(PERCISION))
 assert.strictEqual(wasm.min([1, 2, 3]).toFixed(PERCISION), Number(1).toFixed(PERCISION))
 assert.strictEqual(wasm.max([1, 2, 3]).toFixed(PERCISION), Number(3).toFixed(PERCISION))
-assert.strictEqual(wasm.median([1.4, 1.1, 2.1, 3.6, 3.4, 3.2]).toFixed(PERCISION), Number(2.65).toFixed(PERCISION))
+assert.strictEqual(wasm.median([3.6, 1.1, 2.1, 1.4, 3.4, 3.2]).toFixed(PERCISION), Number(2.65).toFixed(PERCISION))
 assert.strictEqual(wasm.quantile([1, 2, 3], 0.5).toFixed(PERCISION), Number(2).toFixed(PERCISION))
 assert.strictEqual(wasm.quantile([1, 2, 3, 4], 0.1).toFixed(PERCISION), Number(1.3).toFixed(PERCISION))
 assert.strictEqual(wasm.quantile([1, 1, 1, 2], 0.25).toFixed(PERCISION), Number(1).toFixed(PERCISION))
