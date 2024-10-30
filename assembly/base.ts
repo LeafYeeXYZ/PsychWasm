@@ -99,20 +99,53 @@ export function max(data: f64[]): f64 {
 }
 
 /**
- * Sort numbers in ascending order
- * @param data numbers
- * @returns sorted numbers
+ * Partition the array for QuickSort
+ * @param arr array to partition
+ * @param low starting index
+ * @param high ending index
+ * @param ascending whether to sort in ascending order
+ * @returns partition index
  */
-export function sort(data: f64[]): f64[] {
-  for (let i = 0; i < data.length; i++) {
-    for (let j = i + 1; j < data.length; j++) {
-      if (data[i] > data[j]) {
-        const t: f64 = data[i]
-        data[i] = data[j]
-        data[j] = t
-      }
+function partition(arr: f64[], low: i32, high: i32, ascending: boolean): i32 {
+  const pivot: f64 = arr[high]
+  let i: i32 = low - 1
+  for (let j: i32 = low; j < high; j++) {
+    if (ascending ? arr[j] < pivot : arr[j] > pivot) {
+      i++
+      const temp: f64 = arr[i]
+      arr[i] = arr[j]
+      arr[j] = temp
     }
   }
+  const temp: f64 = arr[i + 1]
+  arr[i + 1] = arr[high]
+  arr[high] = temp
+  return i + 1
+}
+
+/**
+ * QuickSort algorithm
+ * @param arr array to sort
+ * @param low starting index
+ * @param high ending index
+ * @param ascending whether to sort in ascending order
+ */
+function quickSort(arr: f64[], low: i32, high: i32, ascending: boolean): void {
+  if (low < high) {
+    const pi: i32 = partition(arr, low, high, ascending)
+    quickSort(arr, low, pi - 1, ascending)
+    quickSort(arr, pi + 1, high, ascending)
+  }
+}
+
+/**
+ * Sort numbers in ascending or descending order
+ * @param data numbers
+ * @param ascending whether to sort in ascending order
+ * @returns sorted numbers
+ */
+export function sort(data: f64[], ascending: boolean = true): f64[] {
+  quickSort(data, 0, data.length - 1, ascending)
   return data
 }
 
