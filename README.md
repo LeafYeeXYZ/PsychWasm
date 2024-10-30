@@ -12,6 +12,8 @@ The speed for `bootstrapTest` is 2-4x faster than the `TypeScript` version `Psyc
 bun add psych-wasm
 ```
 
+> Note: if you are using `vite`, it is recommended to add `psych-wasm` (as well as other `WebAssembly` packages) to `optimizeDeps.exclude` in `vite.config.ts` to avoid some issues.
+
 ### Import
 
 ```typescript
