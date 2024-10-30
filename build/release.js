@@ -12,6 +12,13 @@ async function instantiate(module, imports = {}) {
           throw Error(`${message} in ${fileName}:${lineNumber}:${columnNumber}`);
         })();
       },
+      seed() {
+        // ~lib/builtins/seed() => f64
+        return (() => {
+          // @external.js
+          return Date.now() * Math.random();
+        })();
+      },
     }),
   };
   const { exports } = await WebAssembly.instantiate(module, adaptedImports);
@@ -62,10 +69,12 @@ async function instantiate(module, imports = {}) {
       data = __lowerArray(__setF64, 4, 3, data) || __notnull();
       return exports.max(data);
     },
-    sort(data) {
-      // assembly/base/sort(~lib/array/Array<f64>) => ~lib/array/Array<f64>
+    sort(data, ascending) {
+      // assembly/base/sort(~lib/array/Array<f64>, bool?) => ~lib/array/Array<f64>
       data = __lowerArray(__setF64, 4, 3, data) || __notnull();
-      return __liftArray(__getF64, 3, exports.sort(data) >>> 0);
+      ascending = ascending ? 1 : 0;
+      exports.__setArgumentsLength(arguments.length);
+      return __liftArray(__getF64, 3, exports.sort(data, ascending) >>> 0);
     },
     median(data) {
       // assembly/base/median(~lib/array/Array<f64>) => f64
@@ -95,6 +104,18 @@ async function instantiate(module, imports = {}) {
         return exports.cov(x, y);
       } finally {
         __release(x);
+      }
+    },
+    bootstrapTest(x, m, y, B, a) {
+      // assembly/bootstrap/bootstrapTest(~lib/array/Array<f64>, ~lib/array/Array<f64>, ~lib/array/Array<f64>, i32, f64) => ~lib/array/Array<f64>
+      x = __retain(__lowerArray(__setF64, 4, 3, x) || __notnull());
+      m = __retain(__lowerArray(__setF64, 4, 3, m) || __notnull());
+      y = __lowerArray(__setF64, 4, 3, y) || __notnull();
+      try {
+        return __liftArray(__getF64, 3, exports.bootstrapTest(x, m, y, B, a) >>> 0);
+      } finally {
+        __release(x);
+        __release(m);
       }
     },
   }, exports);
@@ -203,6 +224,7 @@ export const {
   quantile,
   corr,
   cov,
+  bootstrapTest,
 } = await (async url => instantiate(
   await (async () => {
     const isNodeOrBun = typeof process != "undefined" && process.versions != null && (process.versions.node != null || process.versions.bun != null);
