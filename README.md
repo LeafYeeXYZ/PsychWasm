@@ -17,7 +17,7 @@ bun add psych-wasm
 ### Import
 
 ```typescript
-import { corr, mean, bootstrapTest } from 'psych-wasm'
+import { corr, mean, bootstrapTest, z2p, p2f } from 'psych-wasm'
 
 console.log(mean([1, 2, 3, 4, 5])) // 3
 console.log(corr([1, 2, 3, 4, 5], [5, 4, 3, 2, 1])) // -1
@@ -28,6 +28,9 @@ console.log(bootstrapTest(
   1000,
   0.05
 )) // [xxx, xxx] (95% confidence interval of ab (mediation effect))
+console.log(z2p(1.96).toFixed(3)) // 0.975
+console.log(z2p(-2.58).toFixed(3)) // 0.005
+console.log(p2f(0.05, 5, 5).toFixed(2)) // 7.15
 ```
 
 ## Development

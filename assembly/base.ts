@@ -198,3 +198,14 @@ export function corr(x: f64[], y: f64[]): f64 {
 export function cov(x: f64[], y: f64[]): f64 {
   return sp(x, y) / x.length
 }
+
+/**
+ * AssemblyScript implementation of toFixed
+ * @param n float number
+ * @param d precision
+ * @returns fixed number
+ */
+export function fixed(n: f64, d: i32): f64 {
+  const p: f64 = Math.pow(10, d)
+  return Math.round(n * p) / p
+}

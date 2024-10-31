@@ -84,6 +84,13 @@ export declare function corr(x: Array<number>, y: Array<number>): number;
  */
 export declare function cov(x: Array<number>, y: Array<number>): number;
 /**
+ * assembly/base/fixed
+ * @param n `f64`
+ * @param d `i32`
+ * @returns `f64`
+ */
+export declare function fixed(n: number, d: number): number;
+/**
  * assembly/mediation/bootstrap/bootstrapTest
  * @param x `~lib/array/Array<f64>`
  * @param m `~lib/array/Array<f64>`
@@ -93,3 +100,49 @@ export declare function cov(x: Array<number>, y: Array<number>): number;
  * @returns `~lib/array/Array<f64>`
  */
 export declare function bootstrapTest(x: Array<number>, m: Array<number>, y: Array<number>, B: number, a: number): Array<number>;
+/**
+ * assembly/distribution/f/f2p
+ * @param f `f64`
+ * @param df1 `f64`
+ * @param df2 `f64`
+ * @param twoside `bool`
+ * @returns `f64`
+ */
+export declare function f2p(f: number, df1: number, df2: number, twoside?: boolean): number;
+/**
+ * assembly/distribution/f/p2f
+ * @param p `f64`
+ * @param df1 `f64`
+ * @param df2 `f64`
+ * @param twoside `bool`
+ * @returns `f64`
+ */
+export declare function p2f(p: number, df1: number, df2: number, twoside?: boolean): number;
+/**
+ * assembly/distribution/t/t2p
+ * @param t `f64`
+ * @param df `f64`
+ * @param twoside `bool`
+ * @returns `f64`
+ */
+export declare function t2p(t: number, df: number, twoside?: boolean): number;
+/**
+ * assembly/distribution/t/p2t
+ * @param p `f64`
+ * @param df `f64`
+ * @param twoside `bool`
+ * @returns `f64`
+ */
+export declare function p2t(p: number, df: number, twoside?: boolean): number;
+/**
+ * assembly/distribution/z/p2z
+ * @param p `f64`
+ * @returns `f64`
+ */
+export declare function p2z(p: number): number;
+/**
+ * assembly/distribution/z/z2p
+ * @param z `f64`
+ * @returns `f64`
+ */
+export declare function z2p(z: number): number;

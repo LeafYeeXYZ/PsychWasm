@@ -118,6 +118,30 @@ async function instantiate(module, imports = {}) {
         __release(m);
       }
     },
+    f2p(f, df1, df2, twoside) {
+      // assembly/distribution/f/f2p(f64, f64, f64, bool?) => f64
+      twoside = twoside ? 1 : 0;
+      exports.__setArgumentsLength(arguments.length);
+      return exports.f2p(f, df1, df2, twoside);
+    },
+    p2f(p, df1, df2, twoside) {
+      // assembly/distribution/f/p2f(f64, f64, f64, bool?) => f64
+      twoside = twoside ? 1 : 0;
+      exports.__setArgumentsLength(arguments.length);
+      return exports.p2f(p, df1, df2, twoside);
+    },
+    t2p(t, df, twoside) {
+      // assembly/distribution/t/t2p(f64, f64, bool?) => f64
+      twoside = twoside ? 1 : 0;
+      exports.__setArgumentsLength(arguments.length);
+      return exports.t2p(t, df, twoside);
+    },
+    p2t(p, df, twoside) {
+      // assembly/distribution/t/p2t(f64, f64, bool?) => f64
+      twoside = twoside ? 1 : 0;
+      exports.__setArgumentsLength(arguments.length);
+      return exports.p2t(p, df, twoside);
+    },
   }, exports);
   function __liftString(pointer) {
     if (!pointer) return null;
@@ -224,7 +248,14 @@ export const {
   quantile,
   corr,
   cov,
+  fixed,
   bootstrapTest,
+  f2p,
+  p2f,
+  t2p,
+  p2t,
+  p2z,
+  z2p,
 } = await (async url => instantiate(
   await (async () => {
     const isNodeOrBun = typeof process != "undefined" && process.versions != null && (process.versions.node != null || process.versions.bun != null);
