@@ -13,7 +13,7 @@
     "psychology"
   ],
   "type": "module",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "devDependencies": {
     "@types/bun": "latest",
     "assemblyscript": "^0.27.30"
@@ -22,7 +22,10 @@
     "typescript": "^5.0.0"
   },
   "exports": {
-    ".": null,
+    ".": {
+      "import": "./build/release.js",
+      "types": "./build/release.d.ts"
+    },
     "./as": {
       "import": "./build/release.js",
       "types": "./build/release.d.ts"
