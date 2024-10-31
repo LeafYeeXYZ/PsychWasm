@@ -18,14 +18,6 @@ import { _ss, corr, f2p, mean, sp, ss, std, t2p } from '../../build/release.js'
  * ```
  */
 export class LinearRegressionOne {
-	/**
-	 * Construct one-variable linear regression
-	 *
-	 * 构造一元线性回归
-	 * @param x independent variable
-	 * @param y dependent variable
-	 * @throws {TypeError} The x and y data of linear regression must be equal
-	 */
 	constructor(x: number[], y: number[]) {
 		if (x.length !== y.length) {
 			throw new TypeError(
@@ -49,7 +41,7 @@ export class LinearRegressionOne {
 		this.r2 = this.SSr / this.SSt
 		this.F = (this.SSr / this.dfR) / (this.SSe / this.dfE)
 		this.t = Math.sqrt(Math.abs(this.F))
-		this.p = f2p(this.F, this.dfR, this.dfE)
+		this.p = f2p(this.F, this.dfR, this.dfE, false)
 		this.SEb1 = Math.sqrt(this.SSe / (this.dfE * this.SSx))
 	}
 	/**
@@ -199,16 +191,6 @@ export class LinearRegressionOne {
  * ```
  */
 export class LinearRegressionTwo {
-	/**
-	 * Construct two-variable linear regression
-	 *
-	 * 构造二元线性回归
-	 * @param x1 first independent variable
-	 * @param x2 second independent variable
-	 * @param y dependent variable
-	 * @param type use Standard Regression or Sequential Regression
-	 * @throws {TypeError} The x and y data of linear regression must be equal
-	 */
 	constructor(
 		x1: number[],
 		x2: number[],
@@ -274,7 +256,7 @@ export class LinearRegressionTwo {
 		this.r2 = this.SSr / this.SSt
 		this.r2adj = 1 - (this.dfT / this.dfE) * (1 - this.r2)
 		this.F = (this.SSr / this.dfR) / (this.SSe / this.dfE)
-		this.p = f2p(this.F, this.dfR, this.dfE)
+		this.p = f2p(this.F, this.dfR, this.dfE, false)
 
 		if (type === 'standard') {
 			this.SEb1 = Math.sqrt(this.SSe / (this.dfE * this.SSx1))
@@ -288,7 +270,7 @@ export class LinearRegressionTwo {
 			this.b1F = one.F
 			this.b1p = one.p
 			this.b2F = (this.r2 - one.r2) / ((1 - this.r2) / this.dfE)
-			this.b2p = f2p(Math.abs(this.b2F), this.dfR, this.dfE)
+			this.b2p = f2p(Math.abs(this.b2F), this.dfR, this.dfE, false)
 		}
 	}
 	/**

@@ -13,7 +13,7 @@
     "psychology"
   ],
   "type": "module",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "devDependencies": {
     "@types/bun": "latest",
     "assemblyscript": "^0.27.30"
