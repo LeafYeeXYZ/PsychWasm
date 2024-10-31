@@ -4,9 +4,10 @@
 
 `psych-wasm/as` provides basic functions directly using WebAssembly, while `psych-wasm/ts` provides advanced functions using WebAssembly and TypeScript.
 
+**For full documentation, see [here](https://psych-wasm.pages.dev/).**
+
 - [Introduction](#introduction)
 - [Usage](#usage)
-- [API Reference \[WIP\]](#api-reference-wip)
 - [Development](#development)
 
 # Usage
@@ -19,7 +20,7 @@ bun add psych-wasm
 
 Note that if you are using `vite`, it is recommended to add `psych-wasm` (as well as other `WebAssembly` packages) to `optimizeDeps.exclude` in `vite.config.ts` to avoid some issues.
 
-Then, you can import functions from `psych-wasm/as` and `psych-wasm/ts` in your code.
+Then, you can import functions from `psych-wasm/as` (for basic functions directly using WebAssembly) or `psych-wasm/ts` (for advanced functions using TypeScript backed by WebAssembly). All functions can also be imported from `psych-wasm` directly.
 
 ```typescript
 // Basic functions directly using WebAssembly
@@ -45,10 +46,6 @@ import { LinearRegressionOne } from 'psych-wasm/ts'
 const lr = new LinearRegressionOne([1, 2, 3, 4, 5], [5, 4, 3, 2, 1])
 console.log(lr.b1, lr.F, lr.p) // -1, Infinity, 0
 ```
-
-# API Reference [WIP]
-
-For now, please refer to JSDoc in the source code.
 
 # Development
 

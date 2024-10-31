@@ -1,35 +1,4 @@
 /**
- * Calculate the mode of numbers  
- * If there are multiple modes, return 3 * median - 2 * mean
- * @param data numbers
- * @returns mode of numbers
- */
-export function mode(data: f64[]): f64 {
-  const freq: Map<f64, i32> = new Map<f64, i32>()
-  let maxFreq: i32 = 0
-  for (let i = 0; i < data.length; i++) {
-    const f: i32 = (freq.has(data[i]) ? freq.get(data[i]) : 0) + 1
-    freq.set(data[i], f)
-    if (f > maxFreq) {
-      maxFreq = f
-    }
-  }
-  const modes: f64[] = []
-  const k: f64[] = freq.keys()
-  const v: i32[] = freq.values()
-  for (let i = 0; i < freq.size; i++) {
-    if (v[i] == maxFreq) {
-      modes.push(k[i])
-    }
-  }
-  if (modes.length == 1) {
-    return modes[0]
-  } else {
-    return 3 * median(data) - 2 * mean(data)
-  }
-}
-
-/**
  * Calculate the sum of numbers
  * @param data numbers
  * @returns sum of numbers
@@ -151,7 +120,7 @@ export function max(data: f64[]): f64 {
  * @param ascending whether to sort in ascending order
  * @returns partition index
  */
-function partition(arr: f64[], low: i32, high: i32, ascending: boolean): i32 {
+function partition(arr: f64[], low: i32, high: i32, ascending: bool): i32 {
   const pivot: f64 = arr[high]
   let i: i32 = low - 1
   for (let j: i32 = low; j < high; j++) {
@@ -175,7 +144,7 @@ function partition(arr: f64[], low: i32, high: i32, ascending: boolean): i32 {
  * @param high ending index
  * @param ascending whether to sort in ascending order
  */
-function quickSort(arr: f64[], low: i32, high: i32, ascending: boolean): void {
+function quickSort(arr: f64[], low: i32, high: i32, ascending: bool): void {
   if (low < high) {
     const pi: i32 = partition(arr, low, high, ascending)
     quickSort(arr, low, pi - 1, ascending)
@@ -189,7 +158,7 @@ function quickSort(arr: f64[], low: i32, high: i32, ascending: boolean): void {
  * @param ascending whether to sort in ascending order
  * @returns sorted numbers
  */
-export function sort(data: f64[], ascending: boolean = true): f64[] {
+export function sort(data: f64[], ascending: bool = true): f64[] {
   const copy: f64[] = data.slice()
   quickSort(copy, 0, data.length - 1, ascending)
   return copy

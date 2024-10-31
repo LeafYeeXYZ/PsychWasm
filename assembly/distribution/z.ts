@@ -28,7 +28,7 @@ export function p2z(p: f64): f64 {
  * @param z z value
  * @returns p value
  */
-export function z2p(z: number): number {
+export function z2p(z: f64): f64 {
   const p = 0.3275911
   const a1 = 0.254829592
   const a2 = -0.284496736

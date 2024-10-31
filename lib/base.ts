@@ -1,4 +1,4 @@
-import { mean, std, z2p } from '../build/release.js'
+import { mean, std, z2p, median } from '../build/release.js'
 
 const TOFIXED = 12
 
@@ -10,7 +10,7 @@ const TOFIXED = 12
  * @returns kurtosis, z value, and significance
  * @example
  * ```typescript
- * import { kurtosis } from '@leaf/psych-lib'
+ * import { kurtosis } from 'psych-wasm/ts'
  * kurtosis([5, 5, 6, 8, 5])
  * ```
  */
@@ -38,7 +38,7 @@ export function kurtosis(data: number[]): {
  * @returns skewness, z value, and significance
  * @example
  * ```typescript
- * import { skewness } from '@leaf/psych-lib'
+ * import { skewness } from 'psych-wasm/ts'
  * skewness([1, 2, 3, 4, 5])
  * ```
  */
@@ -56,4 +56,41 @@ export function skewness(data: number[]): {
 		.toFixed(TOFIXED)
 	const p = (1 - z2p(Math.abs(z))) * 2
 	return { skewness, z, p }
+}
+
+/**
+ * Calculate the mode of numbers  
+ * If there are multiple modes, return 3 * median - 2 * mean  
+ * 
+ * 计算数字的众数 (如果有多个众数，则返回 3 * 中位数 - 2 * 平均数)
+ * @param data numbers
+ * @returns mode of numbers
+ * @example
+ * ```typescript
+ * import { mode } from 'psych-wasm/ts'
+ * mode([1, 2, 3, 3, 4, 5]) // 3
+ * mode([1, 2, 3, 4, 5, 6]) // 3.5
+ * ```
+ */
+export function mode(data: number[]): number {
+	const freq = new Map<number, number>()
+	let max = 0
+	for (let i = 0; i < data.length; i++) {
+		const f = (freq.has(data[i]) ? freq.get(data[i])! : 0) + 1
+		freq.set(data[i], f)
+		if (f > max) {
+			max = f
+		}
+	}
+	const modes: number[] = []
+	for (const [k, v] of freq) {
+		if (v === max) {
+			modes.push(k)
+		}
+	}
+  if (modes.length == 1) {
+    return modes[0]
+  } else {
+    return 3 * median(data) - 2 * mean(data)
+  }
 }

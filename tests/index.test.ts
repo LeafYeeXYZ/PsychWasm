@@ -25,8 +25,6 @@ assert.strictEqual(wasm.cov([1, 2, 3], [4, 6, 8]).toFixed(PERCISION), Number(4 /
 assert.strictEqual(wasm.fixed(1.23456789, 2).toFixed(PERCISION), Number(1.23).toFixed(PERCISION))
 assert.strictEqual(wasm.fixed(1.23456789, 3).toFixed(PERCISION), Number(1.235).toFixed(PERCISION))
 assert.strictEqual(wasm._ss([1, 2, 3], [4, 6, 8]).toFixed(PERCISION), Number(50).toFixed(PERCISION))
-assert.strictEqual(wasm.mode([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).toFixed(PERCISION), Number(5.5).toFixed(PERCISION))
-assert.strictEqual(wasm.mode([1, 1, 1, 2, 2, 2, 3, 3, 3, 3]).toFixed(PERCISION), Number(3).toFixed(PERCISION))
 console.timeEnd('base')
 
 // Bootstrap
@@ -86,6 +84,8 @@ assert.strictEqual(skewness.p.toFixed(3), '1.000')
 assert.strictEqual(typeof kurtosis.kurtosis, 'number')
 assert.strictEqual(typeof kurtosis.z, 'number')
 assert.strictEqual(typeof kurtosis.p, 'number')
+assert.strictEqual(ts.mode([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).toFixed(PERCISION), Number(5.5).toFixed(PERCISION))
+assert.strictEqual(ts.mode([1, 1, 1, 2, 2, 2, 3, 3, 3, 3]).toFixed(PERCISION), Number(3).toFixed(PERCISION))
 console.timeEnd('base')
 
 // LinearRegression

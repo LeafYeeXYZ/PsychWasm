@@ -67,7 +67,7 @@ function betacf(x: f64, a: f64, b: f64): f64 {
  * @returns p value
  * @throws {Error} degree of freedom must be greater than 0
  */
-export function t2p(t: f64, df: f64, twoside: boolean = true): f64 {
+export function t2p(t: f64, df: f64, twoside: bool = true): f64 {
   if (df <= 0) {
     throw new Error('degree of freedom must be greater than 0')
   }
@@ -90,7 +90,7 @@ export function t2p(t: f64, df: f64, twoside: boolean = true): f64 {
  * @throws {Error} p value must be in the range (0, 1)
  * @throws {Error} degree of freedom must be greater than 0
  */
-export function p2t(p: f64, df: f64, twoside: boolean = true): f64 {
+export function p2t(p: f64, df: f64, twoside: bool = true): f64 {
   if (p <= 0 || p >= 1) {
     throw new Error('p value must be in the range (0, 1)')
   }

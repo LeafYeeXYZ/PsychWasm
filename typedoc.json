@@ -1,0 +1,7 @@
+{
+  "out": "./docs",
+  "entryPoints": [
+    "./assembly/index.ts",
+    "./lib/index.ts"
+  ],
+}
