@@ -4,7 +4,7 @@
 
 `psych-wasm/as` provides basic functions directly using WebAssembly, while `psych-wasm/ts` provides advanced functions using WebAssembly and TypeScript. All functions can also be imported from `psych-wasm` directly.
 
-**For full documentation, see [here](https://psych-wasm.pages.dev/).**
+**For full documentation, see [here](https://wasm.leafyee.xyz/).**
 
 - [Introduction](#introduction)
 - [Usage](#usage)
@@ -43,7 +43,7 @@ const lr = new LinearRegressionOne([1, 2, 3, 4, 5], [5, 4, 3, 2, 1])
 console.log(lr.b1, lr.F, lr.p) // -1, Infinity, 0
 ```
 
-**For full documentation, see [here](https://psych-wasm.pages.dev/).**
+**For full documentation, see [here](https://wasm.leafyee.xyz/).**
 
 # Development
 
