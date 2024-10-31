@@ -1,4 +1,4 @@
-import { corr, sp, ss, std, sort } from './base'
+import { corr, sp, ss, std, sort } from '../base'
 
 /**
  * Bootstrap sampling

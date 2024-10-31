@@ -1,5 +1,8 @@
 {
   "name": "psych-wasm",
+  "engines": {
+    "bun": "^1.1.30"
+  },
   "keywords": [
     "assemblyscript",
     "wasm",
@@ -25,10 +28,10 @@
     }
   },
   "scripts": {
-    "asbuild:debug": "asc assembly/index.ts --target debug",
-    "asbuild:release": "asc assembly/index.ts --target release",
-    "asbuild": "bun run asbuild:debug && bun run asbuild:release",
-    "test": "bun run asbuild:debug && bun run --bun tests/index.ts",
-    "postinstall": "bun run asbuild:release"
+    "b:d": "asc assembly/index.ts --target debug",
+    "b:r": "asc assembly/index.ts --target release",
+    "b": "bun b:d && bun b:r",
+    "t": "bun b:d && bun run --bun tests/index.test.ts",
+    "postinstall": "bun b:r"
   }
 }

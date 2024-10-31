@@ -37,23 +37,25 @@ console.log(bootstrapTest(
 If you haven't installed `bun` yet, please install it from <https://bun.sh>.
 
 ```bash
-bun install
+bun i
 ```
 
 ### Write Code
 
-Write code in `assembly/*.ts` and export functions in `assembly/index.ts`. Remember to add test cases in `tests/index.ts`.
+Write code in `assembly/*.ts` and export functions in `assembly/index.ts`. Remember to add test cases in `tests/index.test.ts`.
 
 ### Test
 
 ```bash
-bun run test
+bun t
 ```
 
 ### Build
 
 ```bash
-bun run asbuild
+bun b:d # debug
+bun b:r # release
+bun b # both
 ```
 
 ### Publish
