@@ -24,6 +24,11 @@ async function instantiate(module, imports = {}) {
   const { exports } = await WebAssembly.instantiate(module, adaptedImports);
   const memory = exports.memory || imports.env.memory;
   const adaptedExports = Object.setPrototypeOf({
+    mode(data) {
+      // assembly/base/mode(~lib/array/Array<f64>) => f64
+      data = __lowerArray(__setF64, 4, 3, data) || __notnull();
+      return exports.mode(data);
+    },
     sum(data) {
       // assembly/base/sum(~lib/array/Array<f64>) => f64
       data = __lowerArray(__setF64, 4, 3, data) || __notnull();
@@ -245,6 +250,7 @@ async function instantiate(module, imports = {}) {
 }
 export const {
   memory,
+  mode,
   sum,
   mean,
   ss,

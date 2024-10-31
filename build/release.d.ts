@@ -1,6 +1,12 @@
 /** Exported memory */
 export declare const memory: WebAssembly.Memory;
 /**
+ * assembly/base/mode
+ * @param data `~lib/array/Array<f64>`
+ * @returns `f64`
+ */
+export declare function mode(data: Array<number>): number;
+/**
  * assembly/base/sum
  * @param data `~lib/array/Array<f64>`
  * @returns `f64`

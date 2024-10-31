@@ -1,4 +1,35 @@
 /**
+ * Calculate the mode of numbers  
+ * If there are multiple modes, return 3 * median - 2 * mean
+ * @param data numbers
+ * @returns mode of numbers
+ */
+export function mode(data: f64[]): f64 {
+  const freq: Map<f64, i32> = new Map<f64, i32>()
+  let maxFreq: i32 = 0
+  for (let i = 0; i < data.length; i++) {
+    const f: i32 = (freq.has(data[i]) ? freq.get(data[i]) : 0) + 1
+    freq.set(data[i], f)
+    if (f > maxFreq) {
+      maxFreq = f
+    }
+  }
+  const modes: f64[] = []
+  const k: f64[] = freq.keys()
+  const v: i32[] = freq.values()
+  for (let i = 0; i < freq.size; i++) {
+    if (v[i] == maxFreq) {
+      modes.push(k[i])
+    }
+  }
+  if (modes.length == 1) {
+    return modes[0]
+  } else {
+    return 3 * median(data) - 2 * mean(data)
+  }
+}
+
+/**
  * Calculate the sum of numbers
  * @param data numbers
  * @returns sum of numbers
