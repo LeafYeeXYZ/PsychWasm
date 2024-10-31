@@ -1,9 +1,10 @@
 import assert from 'node:assert'
-import * as wasm from '../build/debug.js'
+import * as wasm from '../build/release.js'
+import * as ts from '../lib/index.ts'
 
 const PERCISION = 12
 
-console.time('total')
+console.time('---AssemblyScript')
 
 // Base
 console.time('base')
@@ -67,4 +68,40 @@ assert.strictEqual(wasm.p2f(0.05, 1.0, 1.0).toFixed(1), '647.8')
 assert.strictEqual(wasm.p2f(0.05, 5, 5).toFixed(2), '7.15')
 console.timeEnd('distribution')
 
-console.timeEnd('total')
+console.timeEnd('---AssemblyScript')
+
+
+
+console.time('---TypeScript')
+
+// Base
+console.time('base')
+const kurtosis = ts.kurtosis(x)
+const skewness = ts.skewness(x)
+assert.strictEqual(skewness.skewness.toFixed(PERCISION), Number(0).toFixed(PERCISION))
+assert.strictEqual(skewness.z.toFixed(PERCISION), Number(0).toFixed(PERCISION))
+assert.strictEqual(skewness.p.toFixed(3), '1.000')
+assert.strictEqual(typeof kurtosis.kurtosis, 'number')
+assert.strictEqual(typeof kurtosis.z, 'number')
+assert.strictEqual(typeof kurtosis.p, 'number')
+console.timeEnd('base')
+
+// LinearRegression
+console.time('linearRegression')
+const lr1 = new ts.LinearRegressionOne(x, y)
+const lr2 = new ts.LinearRegressionTwo(x, m, y)
+const lr3 = new ts.LinearRegressionTwo(x, m, y, 'sequential')
+assert.strictEqual(typeof lr1.b0, 'number')
+assert.strictEqual(typeof lr1.b1, 'number')
+assert.strictEqual(typeof lr1.p, 'number')
+assert.strictEqual(lr2.b2 === lr3.b2, true)
+assert.strictEqual(lr2.b1 < lr3.b1, true)
+assert.strictEqual(typeof lr2.p, 'number')
+assert.strictEqual(typeof lr3.p, 'number')
+assert.strictEqual(typeof lr2.b1p, 'number')
+assert.strictEqual(typeof lr3.b1p, 'number')
+assert.strictEqual(typeof lr2.b2p, 'number')
+assert.strictEqual(typeof lr3.b2p, 'number')
+console.timeEnd('linearRegression')
+
+console.timeEnd('---TypeScript')
