@@ -83,5 +83,5 @@ PsychWasm does not compile TypeScript code into JavaScript, which means you need
 Now you can publish the package by the following command. Before publishing, remember to update the version in `package.json`.
 
 ```bash
-bun publish
+bun p
 ```
