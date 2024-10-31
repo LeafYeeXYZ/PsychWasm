@@ -28,10 +28,9 @@
     }
   },
   "scripts": {
-    "b:d": "bunx asc assembly/index.ts --target debug",
-    "b:r": "bunx asc assembly/index.ts --target release",
+    "b:d": "asc assembly/index.ts --target debug",
+    "b:r": "asc assembly/index.ts --target release",
     "b": "bun b:d && bun b:r",
-    "t": "bun b:d && bun run --bun tests/index.test.ts",
-    "postinstall": "bun b:r"
+    "t": "bun b:d && bun run --bun tests/index.test.ts"
   }
 }
