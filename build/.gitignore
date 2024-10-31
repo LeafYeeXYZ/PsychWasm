@@ -1,6 +1,2 @@
-debug.d.ts
-debug.js
-debug.wasm
-debug.wasm.map
-debug.wat
+*
 !.gitignore
