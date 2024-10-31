@@ -65,9 +65,16 @@ function betacf(x: f64, a: f64, b: f64): f64 {
  * @param df degree of freedom
  * @param twoside two side or not
  * @returns p value
+ * @throws {Error} degree of freedom must be greater than 0
  */
 export function t2p(t: f64, df: f64, twoside: boolean = true): f64 {
+  if (df <= 0) {
+    throw new Error('degree of freedom must be greater than 0')
+  }
   const x: f64 = Math.abs(t)
+  if (x === Infinity) {
+    return 0
+  }
   const p: f64 = ibeta((x + Math.sqrt(x * x + df)) / (2 * Math.sqrt(x * x + df)), df / 2, df / 2)
   return twoside ? 2 * (1 - p) : 1 - p
 }
