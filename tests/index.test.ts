@@ -23,6 +23,7 @@ assert.strictEqual(wasm.corr([1, 2, 3], [4, 6, 8]).toFixed(PERCISION), Number(1)
 assert.strictEqual(wasm.cov([1, 2, 3], [4, 6, 8]).toFixed(PERCISION), Number(4 / 3).toFixed(PERCISION))
 assert.strictEqual(wasm.fixed(1.23456789, 2).toFixed(PERCISION), Number(1.23).toFixed(PERCISION))
 assert.strictEqual(wasm.fixed(1.23456789, 3).toFixed(PERCISION), Number(1.235).toFixed(PERCISION))
+assert.strictEqual(wasm._ss([1, 2, 3], [4, 6, 8]).toFixed(PERCISION), Number(50).toFixed(PERCISION))
 console.timeEnd('base')
 
 // Bootstrap

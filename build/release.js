@@ -39,6 +39,16 @@ async function instantiate(module, imports = {}) {
       data = __lowerArray(__setF64, 4, 3, data) || __notnull();
       return exports.ss(data);
     },
+    _ss(x, y) {
+      // assembly/base/_ss(~lib/array/Array<f64>, ~lib/array/Array<f64>) => f64
+      x = __retain(__lowerArray(__setF64, 4, 3, x) || __notnull());
+      y = __lowerArray(__setF64, 4, 3, y) || __notnull();
+      try {
+        return exports._ss(x, y);
+      } finally {
+        __release(x);
+      }
+    },
     sp(x, y) {
       // assembly/base/sp(~lib/array/Array<f64>, ~lib/array/Array<f64>) => f64
       x = __retain(__lowerArray(__setF64, 4, 3, x) || __notnull());
@@ -238,6 +248,7 @@ export const {
   sum,
   mean,
   ss,
+  _ss,
   sp,
   vari,
   std,

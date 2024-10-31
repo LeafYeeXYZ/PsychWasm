@@ -19,6 +19,13 @@ export declare function mean(data: Array<number>): number;
  */
 export declare function ss(data: Array<number>): number;
 /**
+ * assembly/base/_ss
+ * @param x `~lib/array/Array<f64>`
+ * @param y `~lib/array/Array<f64>`
+ * @returns `f64`
+ */
+export declare function _ss(x: Array<number>, y: Array<number>): number;
+/**
  * assembly/base/sp
  * @param x `~lib/array/Array<f64>`
  * @param y `~lib/array/Array<f64>`

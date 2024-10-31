@@ -1,8 +1,8 @@
 (module
  (type $0 (func (param i32) (result f64)))
  (type $1 (func (param i32)))
- (type $2 (func (param f64) (result f64)))
- (type $3 (func (param i32 i32) (result f64)))
+ (type $2 (func (param i32 i32) (result f64)))
+ (type $3 (func (param f64) (result f64)))
  (type $4 (func (param i32 i32) (result i32)))
  (type $5 (func))
  (type $6 (func (param i32 i32)))
@@ -239,6 +239,7 @@
  (export "sum" (func $export:assembly/base/sum))
  (export "mean" (func $export:assembly/base/mean))
  (export "ss" (func $export:assembly/base/ss))
+ (export "_ss" (func $export:assembly/base/_ss))
  (export "sp" (func $export:assembly/base/sp))
  (export "vari" (func $export:assembly/base/vari))
  (export "std" (func $export:assembly/base/std))
@@ -4449,7 +4450,7 @@
    global.get $~lib/memory/__stack_pointer
    local.get $0
    i32.store
-   block $__inlined_func$~lib/rt/itcms/__renew$197
+   block $__inlined_func$~lib/rt/itcms/__renew$199
     i32.const 1073741820
     local.get $2
     i32.const 1
@@ -4492,7 +4493,7 @@
      i32.store offset=16
      local.get $2
      local.set $1
-     br $__inlined_func$~lib/rt/itcms/__renew$197
+     br $__inlined_func$~lib/rt/itcms/__renew$199
     end
     local.get $3
     local.get $4
@@ -5880,6 +5881,90 @@
   i32.add
   global.set $~lib/memory/__stack_pointer
   local.get $1
+ )
+ (func $export:assembly/base/_ss (param $0 i32) (param $1 i32) (result f64)
+  (local $2 i32)
+  (local $3 f64)
+  (local $4 f64)
+  global.get $~lib/memory/__stack_pointer
+  i32.const 8
+  i32.sub
+  global.set $~lib/memory/__stack_pointer
+  block $folding-inner0
+   global.get $~lib/memory/__stack_pointer
+   i32.const 13024
+   i32.lt_s
+   br_if $folding-inner0
+   global.get $~lib/memory/__stack_pointer
+   local.get $0
+   i32.store
+   global.get $~lib/memory/__stack_pointer
+   local.get $1
+   i32.store offset=4
+   global.get $~lib/memory/__stack_pointer
+   i32.const 4
+   i32.sub
+   global.set $~lib/memory/__stack_pointer
+   global.get $~lib/memory/__stack_pointer
+   i32.const 13024
+   i32.lt_s
+   br_if $folding-inner0
+   global.get $~lib/memory/__stack_pointer
+   i32.const 0
+   i32.store
+   loop $for-loop|0
+    global.get $~lib/memory/__stack_pointer
+    local.get $0
+    i32.store
+    local.get $0
+    call $~lib/array/Array<f64>#get:length
+    local.get $2
+    i32.gt_s
+    if
+     global.get $~lib/memory/__stack_pointer
+     local.get $0
+     i32.store
+     local.get $0
+     local.get $2
+     call $~lib/array/Array<f64>#__get
+     local.set $4
+     global.get $~lib/memory/__stack_pointer
+     local.get $1
+     i32.store
+     local.get $3
+     local.get $4
+     local.get $1
+     local.get $2
+     call $~lib/array/Array<f64>#__get
+     f64.sub
+     f64.const 2
+     call $~lib/math/NativeMath.pow
+     f64.add
+     local.set $3
+     local.get $2
+     i32.const 1
+     i32.add
+     local.set $2
+     br $for-loop|0
+    end
+   end
+   global.get $~lib/memory/__stack_pointer
+   i32.const 4
+   i32.add
+   global.set $~lib/memory/__stack_pointer
+   global.get $~lib/memory/__stack_pointer
+   i32.const 8
+   i32.add
+   global.set $~lib/memory/__stack_pointer
+   local.get $3
+   return
+  end
+  i32.const 45824
+  i32.const 45872
+  i32.const 1
+  i32.const 1
+  call $~lib/builtins/abort
+  unreachable
  )
  (func $export:assembly/base/sp (param $0 i32) (param $1 i32) (result f64)
   (local $2 f64)

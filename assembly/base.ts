@@ -35,6 +35,20 @@ export function ss(data: f64[]): f64 {
 }
 
 /**
+ * Calculate the sum of squares of two arrays
+ * @param x numbers
+ * @param y numbers
+ * @returns sum of squares of two arrays
+ */
+export function _ss(x: f64[], y: f64[]): f64 {
+  let r: f64 = 0
+  for (let i = 0; i < x.length; i++) {
+    r += (x[i] - y[i]) ** 2
+  }
+  return r
+}
+
+/**
  * Calculate the SP of two arrays
  * @param x array
  * @param y array
