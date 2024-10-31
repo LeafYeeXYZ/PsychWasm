@@ -13,7 +13,7 @@
     "psychology"
   ],
   "type": "module",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "devDependencies": {
     "@types/bun": "latest",
     "assemblyscript": "^0.27.30"
@@ -28,8 +28,8 @@
     }
   },
   "scripts": {
-    "b:d": "asc assembly/index.ts --target debug",
-    "b:r": "asc assembly/index.ts --target release",
+    "b:d": "bunx asc assembly/index.ts --target debug",
+    "b:r": "bunx asc assembly/index.ts --target release",
     "b": "bun b:d && bun b:r",
     "t": "bun b:d && bun run --bun tests/index.test.ts",
     "postinstall": "bun b:r"
