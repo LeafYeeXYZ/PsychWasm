@@ -67,19 +67,22 @@ export function sp(x: f64[], y: f64[]): f64 {
 /**
  * Calculate the variance of numbers
  * @param data numbers
+ * @param sample devided by n - 1 (rather than n) if true (default is true)
  * @returns variance of numbers
  */
-export function vari(data: f64[]): f64 {
-  return ss(data) / data.length
+export function vari(data: f64[], sample: bool = true): f64 {
+  const n: i32 = sample ? data.length - 1 : data.length
+  return ss(data) / n
 }
 
 /**
  * Calculate the standard deviation of numbers
  * @param data numbers
+ * @param sample devided by n - 1 (rather than n) if true (default is true)
  * @returns standard deviation of numbers
  */
-export function std(data: f64[]): f64 {
-  return Math.sqrt(vari(data))
+export function std(data: f64[], sample: bool = true): f64 {
+  return Math.sqrt(vari(data, sample))
 }
 
 /**
