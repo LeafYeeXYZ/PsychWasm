@@ -1,11 +1,12 @@
 import { mean, z2p, median, kurtosis, skewness } from '../build/release.js'
 
 /**
- * Calculate the kurtosis and its z value and significance
+ * Calculate the sample kurtosis and its z value and significance
  *
- * 计算峰度及其 z 值和显著性
+ * 计算样本峰度及其 z 值和显著性
  * @param data data to be calculated
  * @returns kurtosis, z value, and significance
+ * @throws {Error} the length of data must be greater than 3
  * @example
  * ```typescript
  * import { kurtosis } from 'psych-wasm/ts'
@@ -17,18 +18,23 @@ export function kurtosisTest(data: number[]): {
 	z: number
 	p: number
 } {
+	const n = data.length
+	if (n < 4) {
+		throw new Error('the length of data must be greater than 3')
+	}
 	const k = kurtosis(data)
-	const z = k / Math.sqrt(24 / data.length)
+	const z = k / Math.sqrt(24 / n)
 	const p = (1 - z2p(Math.abs(z))) * 2
 	return { kurtosis: k, z, p }
 }
 
 /**
- * Calculate the skewness and its z value and significance
+ * Calculate the sample skewness and its z value and significance
  *
- * 计算偏度及其 z 值和显著性
+ * 计算样本偏度及其 z 值和显著性
  * @param data data to be calculated
  * @returns skewness, z value, and significance
+ * @throws {Error} the length of data must be greater than 3
  * @example
  * ```typescript
  * import { skewness } from 'psych-wasm/ts'
@@ -40,8 +46,12 @@ export function skewnessTest(data: number[]): {
 	z: number
 	p: number
 } {
+	const n = data.length
+	if (n < 4) {
+		throw new Error('the length of data must be greater than 3')
+	}
 	const s = skewness(data)
-	const z = s / Math.sqrt(6 / data.length)
+	const z = s / Math.sqrt(6 / n)
 	const p = (1 - z2p(Math.abs(z))) * 2
 	return { skewness: s, z, p }
 }
@@ -53,6 +63,7 @@ export function skewnessTest(data: number[]): {
  * 计算数字的众数 (如果有多个众数，则返回 3 * 中位数 - 2 * 平均数)
  * @param data numbers
  * @returns mode of numbers
+ * @throws {Error} the length of data must be greater than 0
  * @example
  * ```typescript
  * import { mode } from 'psych-wasm/ts'
@@ -61,9 +72,13 @@ export function skewnessTest(data: number[]): {
  * ```
  */
 export function mode(data: number[]): number {
+	const n = data.length
+	if (n < 1) {
+		throw new Error('the length of data must be greater than 0')
+	}
 	const freq = new Map<number, number>()
 	let max = 0
-	for (let i = 0; i < data.length; i++) {
+	for (let i = 0; i < n; i++) {
 		const f = (freq.has(data[i]) ? freq.get(data[i])! : 0) + 1
 		freq.set(data[i], f)
 		if (f > max) {

@@ -35,6 +35,7 @@ class BootstrapSample {
  * @param B sampling times
  * @param a signifiance level
  * @returns confidence interval
+ * @throws {Error} the length of x, m and y must be the same
  */
 export function bootstrapTest(
   x: f64[],
@@ -43,6 +44,9 @@ export function bootstrapTest(
   B: i32,
   a: f64,
 ): f64[] {
+  if (x.length != m.length || x.length != y.length) {
+    throw new Error('the length of x, m and y must be the same')
+  }
   const ab: f64[] = []
   for (let i = 0; i < B; i++) {
     const sample = new BootstrapSample(x, m, y)
