@@ -1,5 +1,6 @@
 /**
- * @module as WebAssembly Functions
+ * @module as  
+ * @description AssemblyScript APIs
  */
 
 export * from './base'

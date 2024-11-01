@@ -1,5 +1,6 @@
 /**
- * @module ts TypeScript APIs
+ * @module ts
+ * @description TypeScript APIs
  */
 
 export * from './base'
