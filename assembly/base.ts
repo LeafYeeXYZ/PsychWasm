@@ -210,10 +210,12 @@ export function corr(x: f64[], y: f64[]): f64 {
  * Calculate the COV of two arrays
  * @param x array
  * @param y array
+ * @param sample devided by n - 1 (rather than n) if true (default is true)
  * @returns COV of two arrays
  */
-export function cov(x: f64[], y: f64[]): f64 {
-  return sp(x, y) / x.length
+export function cov(x: f64[], y: f64[], sample: bool = true): f64 {
+  const n: i32 = sample ? x.length - 1 : x.length
+  return sp(x, y) / n
 }
 
 /**

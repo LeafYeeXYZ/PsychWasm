@@ -1,6 +1,6 @@
 (module
- (type $0 (func (param i32 i32) (result f64)))
- (type $1 (func (param i32) (result f64)))
+ (type $0 (func (param i32) (result f64)))
+ (type $1 (func (param i32 i32) (result f64)))
  (type $2 (func (param i32)))
  (type $3 (func (param f64) (result f64)))
  (type $4 (func (param i32 i32) (result i32)))
@@ -23,6 +23,7 @@
  (type $21 (func (param i32 f64)))
  (type $22 (func (param i32 i32 i32) (result i32)))
  (type $23 (func (param i32 f64) (result f64)))
+ (type $24 (func (param i32 i32 i32) (result f64)))
  (import "env" "abort" (func $~lib/builtins/abort (param i32 i32 i32 i32)))
  (import "env" "seed" (func $~lib/builtins/seed (result f64)))
  (global $~lib/util/math/log_tail (mut f64) (f64.const 0))
@@ -251,7 +252,7 @@
  (export "median" (func $export:assembly/base/median))
  (export "quantile" (func $export:assembly/base/quantile))
  (export "corr" (func $export:assembly/base/corr))
- (export "cov" (func $export:assembly/base/cov))
+ (export "cov" (func $export:assembly/base/cov@varargs))
  (export "kurtosis" (func $export:assembly/base/kurtosis))
  (export "skewness" (func $export:assembly/base/skewness))
  (export "bootstrapTest" (func $export:assembly/mediation/bootstrap/bootstrapTest))
@@ -4613,7 +4614,7 @@
    global.get $~lib/memory/__stack_pointer
    local.get $0
    i32.store
-   block $__inlined_func$~lib/rt/itcms/__renew$205
+   block $__inlined_func$~lib/rt/itcms/__renew$206
     i32.const 1073741820
     local.get $2
     i32.const 1
@@ -4656,7 +4657,7 @@
      i32.store offset=16
      local.get $2
      local.set $1
-     br $__inlined_func$~lib/rt/itcms/__renew$205
+     br $__inlined_func$~lib/rt/itcms/__renew$206
     end
     local.get $3
     local.get $4
@@ -6752,8 +6753,8 @@
   global.set $~lib/memory/__stack_pointer
   local.get $2
  )
- (func $export:assembly/base/cov (param $0 i32) (param $1 i32) (result f64)
-  (local $2 f64)
+ (func $export:assembly/base/cov@varargs (param $0 i32) (param $1 i32) (param $2 i32) (result f64)
+  (local $3 f64)
   global.get $~lib/memory/__stack_pointer
   i32.const 8
   i32.sub
@@ -6780,6 +6781,53 @@
    global.get $~lib/memory/__stack_pointer
    i64.const 0
    i64.store
+   block $1of1
+    block $0of1
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 2
+      i32.sub
+      br_table $0of1 $1of1 $outOfRange
+     end
+     unreachable
+    end
+    i32.const 1
+    local.set $2
+   end
+   global.get $~lib/memory/__stack_pointer
+   local.get $0
+   i32.store
+   global.get $~lib/memory/__stack_pointer
+   local.get $1
+   i32.store offset=4
+   global.get $~lib/memory/__stack_pointer
+   i32.const 8
+   i32.sub
+   global.set $~lib/memory/__stack_pointer
+   global.get $~lib/memory/__stack_pointer
+   i32.const 13024
+   i32.lt_s
+   br_if $folding-inner0
+   global.get $~lib/memory/__stack_pointer
+   i64.const 0
+   i64.store
+   local.get $2
+   if (result i32)
+    global.get $~lib/memory/__stack_pointer
+    local.get $0
+    i32.store
+    local.get $0
+    call $~lib/array/Array<f64>#get:length
+    i32.const 1
+    i32.sub
+   else
+    global.get $~lib/memory/__stack_pointer
+    local.get $0
+    i32.store
+    local.get $0
+    call $~lib/array/Array<f64>#get:length
+   end
+   local.set $2
    global.get $~lib/memory/__stack_pointer
    local.get $0
    i32.store
@@ -6789,16 +6837,10 @@
    local.get $0
    local.get $1
    call $assembly/base/sp
-   local.set $2
-   global.get $~lib/memory/__stack_pointer
-   local.get $0
-   i32.store
    local.get $2
-   local.get $0
-   call $~lib/array/Array<f64>#get:length
    f64.convert_i32_s
    f64.div
-   local.set $2
+   local.set $3
    global.get $~lib/memory/__stack_pointer
    i32.const 8
    i32.add
@@ -6807,7 +6849,11 @@
    i32.const 8
    i32.add
    global.set $~lib/memory/__stack_pointer
-   local.get $2
+   global.get $~lib/memory/__stack_pointer
+   i32.const 8
+   i32.add
+   global.set $~lib/memory/__stack_pointer
+   local.get $3
    return
   end
   i32.const 45824

@@ -89,9 +89,10 @@ export declare function corr(x: Array<number>, y: Array<number>): number;
  * assembly/base/cov
  * @param x `~lib/array/Array<f64>`
  * @param y `~lib/array/Array<f64>`
+ * @param sample `bool`
  * @returns `f64`
  */
-export declare function cov(x: Array<number>, y: Array<number>): number;
+export declare function cov(x: Array<number>, y: Array<number>, sample?: boolean): number;
 /**
  * assembly/base/fixed
  * @param n `f64`

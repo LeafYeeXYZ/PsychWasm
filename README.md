@@ -3,6 +3,7 @@
 **PsychWasm** is a WebAssembly library that provides APIs for mathematical and statistical calculations, especially for psychological and educational research.
 
 - PsychWasm can be used in all modern JavaScript/TypeScript environments, including browsers, Node.js, Deno, and Bun.
+- The performance of PsychWasm's basic functions is 4-5x faster than JavaScript `mathjs` and 2-3x faster than `simple-statistics`.
 - For use cases, please refer to my another project [PsychPen](https://github.com/LeafYeeXYZ/PsychPen).
 - If you are familiar with `wasmer`, you can also use `psych-wasm/as` in `Rust`、`Go`、`Python` and other languages (`.wasm` file can be found in `build` directory).
 

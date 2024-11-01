@@ -110,12 +110,14 @@ async function instantiate(module, imports = {}) {
         __release(x);
       }
     },
-    cov(x, y) {
-      // assembly/base/cov(~lib/array/Array<f64>, ~lib/array/Array<f64>) => f64
+    cov(x, y, sample) {
+      // assembly/base/cov(~lib/array/Array<f64>, ~lib/array/Array<f64>, bool?) => f64
       x = __retain(__lowerArray(__setF64, 4, 3, x) || __notnull());
       y = __lowerArray(__setF64, 4, 3, y) || __notnull();
+      sample = sample ? 1 : 0;
       try {
-        return exports.cov(x, y);
+        exports.__setArgumentsLength(arguments.length);
+        return exports.cov(x, y, sample);
       } finally {
         __release(x);
       }

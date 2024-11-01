@@ -20,7 +20,7 @@ assert.strictEqual(as.quantile([1, 2, 3, 4], 0.1).toFixed(PERCISION), Number(1.3
 assert.strictEqual(as.quantile([1, 1, 1, 2], 0.25).toFixed(PERCISION), Number(1).toFixed(PERCISION))
 assert.strictEqual(as.sp([1, 2, 3], [4, 6, 8]).toFixed(PERCISION), Number(4).toFixed(PERCISION))
 assert.strictEqual(as.corr([1, 2, 3], [4, 6, 8]).toFixed(PERCISION), Number(1).toFixed(PERCISION))
-assert.strictEqual(as.cov([1, 2, 3], [4, 6, 8]).toFixed(PERCISION), Number(4 / 3).toFixed(PERCISION))
+assert.strictEqual(as.cov([1, 2, 3], [4, 6, 8]).toFixed(PERCISION), Number(2).toFixed(PERCISION))
 assert.strictEqual(as.fixed(1.23456789, 2).toFixed(PERCISION), Number(1.23).toFixed(PERCISION))
 assert.strictEqual(as.fixed(1.23456789, 3).toFixed(PERCISION), Number(1.235).toFixed(PERCISION))
 assert.strictEqual(as._ss([1, 2, 3], [4, 6, 8]).toFixed(PERCISION), Number(50).toFixed(PERCISION))
