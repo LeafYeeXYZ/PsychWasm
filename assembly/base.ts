@@ -232,31 +232,59 @@ export function fixed(n: f64, d: i32): f64 {
 /**
  * Calculate the kurtosis of numbers
  * @param data numbers
+ * @param sample return sample kurtosis otherwise population kurtosis (default is true)
  * @returns kurtosis
+ * @see https://en.wikipedia.org/wiki/Kurtosis
  */
-export function kurtosis(data: f64[]): f64 {
-	const n: i32 = data.length
-	const m: f64 = mean(data)
-	const s: f64 = std(data)
-  let r: f64 = 0
-  for (let i = 0; i < n; i++) {
-    r += ((data[i] - m) / s) ** 4
+export function kurtosis(data: f64[], sample: bool = true): f64 {
+  const n: i32 = data.length
+  const m: f64 = mean(data)
+  if (sample) {
+    let rT: f64 = 0
+    let rB: f64 = 0
+    for (let i = 0; i < n; i++) {
+      rT += (data[i] - m) ** 4
+      rB += (data[i] - m) ** 2
+    }
+    rT /= n
+    rB /= n
+    return rT / (rB ** 2) - 3
+  } else {
+    const s: f64 = std(data)
+    let r: f64 = 0
+    for (let i = 0; i < n; i++) {
+      r += ((data[i] - m) / s) ** 4
+    }
+    return r / n
   }
-  return r / n
 }
 
 /**
  * Calculate the skewness of numbers
  * @param data numbers
+ * @param sample return sample skewness otherwise population skewness (default is true)
  * @returns skewness
+ * @see https://en.wikipedia.org/wiki/Skewness
  */
-export function skewness(data: f64[]): f64 {
+export function skewness(data: f64[], sample: bool = true): f64 {
 	const n: i32 = data.length
 	const m: f64 = mean(data)
-	const s: f64 = std(data)
-  let r: f64 = 0
-  for (let i = 0; i < n; i++) {
-    r += ((data[i] - m) / s) ** 3
+  if (sample) {
+    let rT: f64 = 0
+    let rB: f64 = 0
+    for (let i = 0; i < n; i++) {
+      rT += (data[i] - m) ** 3
+      rB += (data[i] - m) ** 2
+    }
+    rT /= n
+    rB /= n
+    return rT / (rB ** 1.5)
+  } else {
+    const s: f64 = std(data)
+    let r: f64 = 0
+    for (let i = 0; i < n; i++) {
+      r += ((data[i] - m) / s) ** 3
+    }
+    return r / n
   }
-  return r / n
 }

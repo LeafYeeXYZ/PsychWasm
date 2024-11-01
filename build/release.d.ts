@@ -103,15 +103,17 @@ export declare function fixed(n: number, d: number): number;
 /**
  * assembly/base/kurtosis
  * @param data `~lib/array/Array<f64>`
+ * @param sample `bool`
  * @returns `f64`
  */
-export declare function kurtosis(data: Array<number>): number;
+export declare function kurtosis(data: Array<number>, sample?: boolean): number;
 /**
  * assembly/base/skewness
  * @param data `~lib/array/Array<f64>`
+ * @param sample `bool`
  * @returns `f64`
  */
-export declare function skewness(data: Array<number>): number;
+export declare function skewness(data: Array<number>, sample?: boolean): number;
 /**
  * assembly/mediation/bootstrap/bootstrapTest
  * @param x `~lib/array/Array<f64>`

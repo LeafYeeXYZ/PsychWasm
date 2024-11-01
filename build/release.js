@@ -122,15 +122,19 @@ async function instantiate(module, imports = {}) {
         __release(x);
       }
     },
-    kurtosis(data) {
-      // assembly/base/kurtosis(~lib/array/Array<f64>) => f64
+    kurtosis(data, sample) {
+      // assembly/base/kurtosis(~lib/array/Array<f64>, bool?) => f64
       data = __lowerArray(__setF64, 4, 3, data) || __notnull();
-      return exports.kurtosis(data);
+      sample = sample ? 1 : 0;
+      exports.__setArgumentsLength(arguments.length);
+      return exports.kurtosis(data, sample);
     },
-    skewness(data) {
-      // assembly/base/skewness(~lib/array/Array<f64>) => f64
+    skewness(data, sample) {
+      // assembly/base/skewness(~lib/array/Array<f64>, bool?) => f64
       data = __lowerArray(__setF64, 4, 3, data) || __notnull();
-      return exports.skewness(data);
+      sample = sample ? 1 : 0;
+      exports.__setArgumentsLength(arguments.length);
+      return exports.skewness(data, sample);
     },
     bootstrapTest(x, m, y, B, a) {
       // assembly/mediation/bootstrap/bootstrapTest(~lib/array/Array<f64>, ~lib/array/Array<f64>, ~lib/array/Array<f64>, i32, f64) => ~lib/array/Array<f64>
