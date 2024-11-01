@@ -22,6 +22,8 @@ assert.strictEqual(as.cov([1, 2, 3], [4, 6, 8]).toFixed(PERCISION), Number(4 / 3
 assert.strictEqual(as.fixed(1.23456789, 2).toFixed(PERCISION), Number(1.23).toFixed(PERCISION))
 assert.strictEqual(as.fixed(1.23456789, 3).toFixed(PERCISION), Number(1.235).toFixed(PERCISION))
 assert.strictEqual(as._ss([1, 2, 3], [4, 6, 8]).toFixed(PERCISION), Number(50).toFixed(PERCISION))
+assert.strictEqual(as.kurtosis([1, 2, 3, 4, 5]).toFixed(PERCISION), Number(1.7).toFixed(PERCISION))
+assert.strictEqual(as.skewness([1, 2, 3, 4, 5]).toFixed(PERCISION), Number(0).toFixed(PERCISION))
 console.timeEnd('base')
 
 // Bootstrap

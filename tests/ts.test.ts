@@ -8,8 +8,8 @@ console.time('base')
 const x = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 const m = [34, 56, 78, 90, 124, 145, 167, 189, 200, 234]
 const y = [2, 6, 31, 66, 100, 134, 167, 200, 234, 267]
-const kurtosis = ts.kurtosis(x)
-const skewness = ts.skewness(x)
+const kurtosis = ts.kurtosisTest(x)
+const skewness = ts.skewnessTest(x)
 assert.strictEqual(skewness.skewness.toFixed(PERCISION), Number(0).toFixed(PERCISION))
 assert.strictEqual(skewness.z.toFixed(PERCISION), Number(0).toFixed(PERCISION))
 assert.strictEqual(skewness.p.toFixed(3), '1.000')

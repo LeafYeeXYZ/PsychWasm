@@ -98,6 +98,18 @@ export declare function cov(x: Array<number>, y: Array<number>): number;
  */
 export declare function fixed(n: number, d: number): number;
 /**
+ * assembly/base/kurtosis
+ * @param data `~lib/array/Array<f64>`
+ * @returns `f64`
+ */
+export declare function kurtosis(data: Array<number>): number;
+/**
+ * assembly/base/skewness
+ * @param data `~lib/array/Array<f64>`
+ * @returns `f64`
+ */
+export declare function skewness(data: Array<number>): number;
+/**
  * assembly/mediation/bootstrap/bootstrapTest
  * @param x `~lib/array/Array<f64>`
  * @param m `~lib/array/Array<f64>`

@@ -1,6 +1,4 @@
-import { mean, std, z2p, median } from '../build/release.js'
-
-const TOFIXED = 12
+import { mean, z2p, median, kurtosis, skewness } from '../build/release.js'
 
 /**
  * Calculate the kurtosis and its z value and significance
@@ -14,20 +12,15 @@ const TOFIXED = 12
  * kurtosis([5, 5, 6, 8, 5])
  * ```
  */
-export function kurtosis(data: number[]): {
+export function kurtosisTest(data: number[]): {
 	kurtosis: number
 	z: number
 	p: number
 } {
-	const n = data.length
-	const m = mean(data)
-	const s = std(data)
-	const kurtosis = +(data.reduce((acc, Xi) => acc + ((Xi - m) / s) ** 4, 0) / n)
-		.toFixed(TOFIXED)
-	const z = +(kurtosis / Math.sqrt(24 / n))
-		.toFixed(TOFIXED)
+	const k = kurtosis(data)
+	const z = k / Math.sqrt(24 / data.length)
 	const p = (1 - z2p(Math.abs(z))) * 2
-	return { kurtosis, z, p }
+	return { kurtosis: k, z, p }
 }
 
 /**
@@ -42,20 +35,15 @@ export function kurtosis(data: number[]): {
  * skewness([1, 2, 3, 4, 5])
  * ```
  */
-export function skewness(data: number[]): {
+export function skewnessTest(data: number[]): {
 	skewness: number
 	z: number
 	p: number
 } {
-	const n = data.length
-	const m = mean(data)
-	const s = std(data)
-	const skewness = +(data.reduce((acc, Xi) => acc + ((Xi - m) / s) ** 3, 0) / n)
-		.toFixed(TOFIXED)
-	const z = +(skewness / Math.sqrt(6 / n))
-		.toFixed(TOFIXED)
+	const s = skewness(data)
+	const z = s / Math.sqrt(6 / data.length)
 	const p = (1 - z2p(Math.abs(z))) * 2
-	return { skewness, z, p }
+	return { skewness: s, z, p }
 }
 
 /**

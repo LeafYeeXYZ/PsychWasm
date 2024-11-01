@@ -223,3 +223,35 @@ export function fixed(n: f64, d: i32): f64 {
   const p: f64 = Math.pow(10, d)
   return Math.round(n * p) / p
 }
+
+/**
+ * Calculate the kurtosis of numbers
+ * @param data numbers
+ * @returns kurtosis
+ */
+export function kurtosis(data: f64[]): f64 {
+	const n: i32 = data.length
+	const m: f64 = mean(data)
+	const s: f64 = std(data)
+  let r: f64 = 0
+  for (let i = 0; i < n; i++) {
+    r += ((data[i] - m) / s) ** 4
+  }
+  return r / n
+}
+
+/**
+ * Calculate the skewness of numbers
+ * @param data numbers
+ * @returns skewness
+ */
+export function skewness(data: f64[]): f64 {
+	const n: i32 = data.length
+	const m: f64 = mean(data)
+	const s: f64 = std(data)
+  let r: f64 = 0
+  for (let i = 0; i < n; i++) {
+    r += ((data[i] - m) / s) ** 3
+  }
+  return r / n
+}

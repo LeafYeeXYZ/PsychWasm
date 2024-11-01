@@ -116,6 +116,16 @@ async function instantiate(module, imports = {}) {
         __release(x);
       }
     },
+    kurtosis(data) {
+      // assembly/base/kurtosis(~lib/array/Array<f64>) => f64
+      data = __lowerArray(__setF64, 4, 3, data) || __notnull();
+      return exports.kurtosis(data);
+    },
+    skewness(data) {
+      // assembly/base/skewness(~lib/array/Array<f64>) => f64
+      data = __lowerArray(__setF64, 4, 3, data) || __notnull();
+      return exports.skewness(data);
+    },
     bootstrapTest(x, m, y, B, a) {
       // assembly/mediation/bootstrap/bootstrapTest(~lib/array/Array<f64>, ~lib/array/Array<f64>, ~lib/array/Array<f64>, i32, f64) => ~lib/array/Array<f64>
       x = __retain(__lowerArray(__setF64, 4, 3, x) || __notnull());
@@ -260,6 +270,8 @@ export const {
   corr,
   cov,
   fixed,
+  kurtosis,
+  skewness,
   bootstrapTest,
   f2p,
   p2f,
