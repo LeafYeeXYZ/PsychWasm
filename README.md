@@ -59,7 +59,7 @@ bun i
 
 Now you can write `AssemblyScript` code in `assembly/*.ts` and export functions in `assembly/index.ts`, and write `TypeScript` code in `lib/*.ts` and export functions in `lib/index.ts`. 
 
-After writing the code, remember to add test cases in `tests/index.test.ts`. You can run the test cases using the following command.
+After writing the code, remember to add test cases in `tests/*.test.ts`. You can run the test cases using the following command.
 
 ```bash
 bun t
