@@ -3583,6 +3583,7 @@
  (func $assembly/distribution/t/p2t@varargs (param $0 f64) (param $1 f64) (param $2 i32) (param $3 f64) (result f64)
   (local $4 f64)
   (local $5 f64)
+  (local $6 f64)
   block $2of2
    block $1of2
     block $0of2
@@ -3616,6 +3617,7 @@
    unreachable
   end
   local.get $1
+  local.tee $5
   f64.const 0
   f64.le
   if
@@ -3626,40 +3628,37 @@
    call $~lib/builtins/abort
    unreachable
   end
-  f64.const 1
-  local.set $4
+  f64.const 1e6
+  local.set $1
   loop $while-continue|0
-   local.get $4
-   f64.abs
+   local.get $1
+   local.get $6
+   f64.sub
    local.get $3
    f64.gt
    if
-    local.get $5
-    local.get $5
     local.get $1
-    local.get $2
-    call $assembly/distribution/t/t2p
-    local.tee $4
-    local.get $0
-    f64.sub
-    local.get $5
-    local.get $3
+    local.get $6
     f64.add
-    local.get $1
+    f64.const 0.5
+    f64.mul
+    local.tee $4
+    local.get $5
     local.get $2
     call $assembly/distribution/t/t2p
-    local.get $4
-    f64.sub
-    local.get $3
-    f64.div
-    f64.div
-    local.tee $4
-    f64.sub
-    local.set $5
+    local.get $0
+    f64.lt
+    if
+     local.get $4
+     local.set $1
+    else
+     local.get $4
+     local.set $6
+    end
     br $while-continue|0
    end
   end
-  local.get $5
+  local.get $4
  )
  (func $assembly/distribution/z/p2z (param $0 f64) (result f64)
   (local $1 f64)

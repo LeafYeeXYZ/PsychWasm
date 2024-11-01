@@ -98,14 +98,16 @@ export function p2t(p: f64, df: f64, twoside: bool = true, precision: f64 = 0.00
   if (df <= 0) {
     throw new Error('degree of freedom must be greater than 0')
   }
+  let min: f64 = 0.0
+  let max: f64 = 1000000.0
   let t: f64 = 0.0
-  let delta: f64 = 1.0
-  // Newton-Raphson iteration
-  while (Math.abs(delta) > precision) {
-    const t2pValue: f64 = t2p(t, df, twoside)
-    const t2pDerivative: f64 = (t2p(t + precision, df, twoside) - t2pValue) / precision
-    delta = (t2pValue - p) / t2pDerivative
-    t -= delta
+  while (max - min > precision) {
+    t = (max + min) / 2
+    if (t2p(t, df, twoside) < p) {
+      max = t
+    } else {
+      min = t
+    }
   }
   return t
 }
