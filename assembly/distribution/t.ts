@@ -97,7 +97,7 @@ export function p2t(p: f64, df: f64, twoside: bool = true): f64 {
   if (df <= 0) {
     throw new Error('degree of freedom must be greater than 0')
   }
-  const precision: f64 = 0.0000001
+  const precision: f64 = 0.00001
   let min: f64 = 0.0
   let max: f64 = 5.0
   let t: f64 = 0.0

@@ -8,7 +8,7 @@ export function p2z(p: f64): f64 {
   if (p <= 0 || p >= 1) {
     throw new Error('p must be in the range (0, 1)')
   }
-  const precision: f64 = 0.0000001
+  const precision: f64 = 0.00001
   let min: f64 = -5.0
   let max: f64 = 5.0
   let z: f64 = 0.0

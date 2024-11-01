@@ -111,7 +111,7 @@ export function p2f(p: f64, df1: f64, df2: f64, twoside: bool = true): f64 {
   let min: f64 = 0.0
   let max: f64 = 1000000.0
   let f: f64 = 0.0
-  const precision: f64 = 0.0000001
+  const precision: f64 = 0.00001
   while (max - min > precision) {
     f = (min + max) / 2
     if (f2p(f, df1, df2, twoside) < p) {

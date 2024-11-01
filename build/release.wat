@@ -3394,7 +3394,7 @@
    local.get $1
    local.get $6
    f64.sub
-   f64.const 1e-07
+   f64.const 1e-05
    f64.gt
    if
     local.get $6
@@ -3624,7 +3624,7 @@
    local.get $1
    local.get $5
    f64.sub
-   f64.const 1e-07
+   f64.const 1e-05
    f64.gt
    if
     local.get $5
@@ -3729,7 +3729,7 @@
    local.get $3
    local.get $2
    f64.sub
-   f64.const 1e-07
+   f64.const 1e-05
    f64.gt
    if
     local.get $2
