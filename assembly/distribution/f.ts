@@ -64,7 +64,7 @@ function betacf(x: f64, a: f64, b: f64): f64 {
  * @param f f value
  * @param df1 degree of freedom 1
  * @param df2 degree of freedom 2
- * @param twoside two side or not
+ * @param twoside two side or not (default is true)
  * @returns p value
  * @throws {Error} f must be greater than 0
  * @throws {Error} df1 must be greater than 0
@@ -92,13 +92,14 @@ export function f2p(f: f64, df1: f64, df2: f64, twoside: bool = true): f64 {
  * @param p p value
  * @param df1 degree of freedom 1
  * @param df2 degree of freedom 2
- * @param twoside two side or not
+ * @param twoside two side or not (default is true)
+ * @param precision precision (default is 0.00001)
  * @returns f value
  * @throws {Error} p value must be in the range (0, 1)
  * @throws {Error} df1 must be greater than 0
  * @throws {Error} df2 must be greater than 0
  */
-export function p2f(p: f64, df1: f64, df2: f64, twoside: bool = true): f64 {
+export function p2f(p: f64, df1: f64, df2: f64, twoside: bool = true, precision: f64 = 0.00001): f64 {
   if (p <= 0 || p >= 1) {
     throw new Error('p value must be in the range (0, 1)')
   }
@@ -111,7 +112,6 @@ export function p2f(p: f64, df1: f64, df2: f64, twoside: bool = true): f64 {
   let min: f64 = 0.0
   let max: f64 = 1000000.0
   let f: f64 = 0.0
-  const precision: f64 = 0.00001
   while (max - min > precision) {
     f = (min + max) / 2
     if (f2p(f, df1, df2, twoside) < p) {

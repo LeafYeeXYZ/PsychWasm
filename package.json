@@ -1,6 +1,6 @@
 {
   "name": "psych-wasm",
-  "version": "2.3.0",
+  "version": "2.3.2",
   "devDependencies": {
     "@types/bun": "latest",
     "assemblyscript": "^0.27.30",

@@ -134,9 +134,10 @@ export declare function f2p(f: number, df1: number, df2: number, twoside?: boole
  * @param df1 `f64`
  * @param df2 `f64`
  * @param twoside `bool`
+ * @param precision `f64`
  * @returns `f64`
  */
-export declare function p2f(p: number, df1: number, df2: number, twoside?: boolean): number;
+export declare function p2f(p: number, df1: number, df2: number, twoside?: boolean, precision?: number): number;
 /**
  * assembly/distribution/t/t2p
  * @param t `f64`
@@ -150,9 +151,10 @@ export declare function t2p(t: number, df: number, twoside?: boolean): number;
  * @param p `f64`
  * @param df `f64`
  * @param twoside `bool`
+ * @param precision `f64`
  * @returns `f64`
  */
-export declare function p2t(p: number, df: number, twoside?: boolean): number;
+export declare function p2t(p: number, df: number, twoside?: boolean, precision?: number): number;
 /**
  * assembly/distribution/z/p2z
  * @param p `f64`

@@ -63,7 +63,7 @@ function betacf(x: f64, a: f64, b: f64): f64 {
  * otherwise, P value is the probability of the -|t| to the left tail and |t| to the right tail
  * @param t t value
  * @param df degree of freedom
- * @param twoside two side or not
+ * @param twoside two side or not (default is true)
  * @returns p value
  * @throws {Error} degree of freedom must be greater than 0
  */
@@ -85,29 +85,27 @@ export function t2p(t: f64, df: f64, twoside: bool = true): f64 {
  * otherwise, P value means the probability of the -|t| to the left tail and |t| to the right tail
  * @param p p value
  * @param df degree of freedom
- * @param twoside two side or not
+ * @param twoside two side or not (default is true)
+ * @param precision precision (default is 0.00001)
  * @returns t value
  * @throws {Error} p value must be in the range (0, 1)
  * @throws {Error} degree of freedom must be greater than 0
  */
-export function p2t(p: f64, df: f64, twoside: bool = true): f64 {
+export function p2t(p: f64, df: f64, twoside: bool = true, precision: f64 = 0.00001): f64 {
   if (p <= 0 || p >= 1) {
     throw new Error('p value must be in the range (0, 1)')
   }
   if (df <= 0) {
     throw new Error('degree of freedom must be greater than 0')
   }
-  const precision: f64 = 0.00001
-  let min: f64 = 0.0
-  let max: f64 = 5.0
   let t: f64 = 0.0
-  while (max - min > precision) {
-    t = (min + max) / 2
-    if (t2p(t, df, twoside) < p) {
-      max = t
-    } else {
-      min = t
-    }
+  let delta: f64 = 1.0
+  // Newton-Raphson iteration
+  while (Math.abs(delta) > precision) {
+    const t2pValue: f64 = t2p(t, df, twoside)
+    const t2pDerivative: f64 = (t2p(t + precision, df, twoside) - t2pValue) / precision
+    delta = (t2pValue - p) / t2pDerivative
+    t -= delta
   }
   return t
 }

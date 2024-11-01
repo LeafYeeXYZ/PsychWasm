@@ -6,9 +6,9 @@
  (type $4 (func (param i32 i32) (result i32)))
  (type $5 (func))
  (type $6 (func (param i32 i32)))
- (type $7 (func (param f64 f64 f64 i32) (result f64)))
- (type $8 (func (param f64 f64 i32) (result f64)))
- (type $9 (func (param i32 i32 i32 i32)))
+ (type $7 (func (param i32 i32 i32 i32)))
+ (type $8 (func (param f64 f64 f64 i32) (result f64)))
+ (type $9 (func (param f64 f64 i32) (result f64)))
  (type $10 (func (param i32) (result i32)))
  (type $11 (func (param i32 i32 i32 i32 f64) (result i32)))
  (type $12 (func (param f64 f64) (result f64)))
@@ -17,10 +17,12 @@
  (type $15 (func (param f64 i32) (result f64)))
  (type $16 (func (result f64)))
  (type $17 (func (param f64 f64 f64) (result f64)))
- (type $18 (func (param i32 i32 f64)))
- (type $19 (func (param i32 f64)))
- (type $20 (func (param i32 i32 i32) (result i32)))
- (type $21 (func (param i32 f64) (result f64)))
+ (type $18 (func (param f64 f64 f64 i32 f64) (result f64)))
+ (type $19 (func (param f64 f64 i32 f64) (result f64)))
+ (type $20 (func (param i32 i32 f64)))
+ (type $21 (func (param i32 f64)))
+ (type $22 (func (param i32 i32 i32) (result i32)))
+ (type $23 (func (param i32 f64) (result f64)))
  (import "env" "abort" (func $~lib/builtins/abort (param i32 i32 i32 i32)))
  (import "env" "seed" (func $~lib/builtins/seed (result f64)))
  (global $~lib/util/math/log_tail (mut f64) (f64.const 0))
@@ -3333,22 +3335,26 @@
   local.get $3
   call $assembly/distribution/f/f2p
  )
- (func $assembly/distribution/f/p2f@varargs (param $0 f64) (param $1 f64) (param $2 f64) (param $3 i32) (result f64)
-  (local $4 f64)
+ (func $assembly/distribution/f/p2f@varargs (param $0 f64) (param $1 f64) (param $2 f64) (param $3 i32) (param $4 f64) (result f64)
   (local $5 f64)
   (local $6 f64)
-  block $1of1
-   block $0of1
-    block $outOfRange
-     global.get $~argumentsLength
-     i32.const 3
-     i32.sub
-     br_table $0of1 $1of1 $outOfRange
+  (local $7 f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 3
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
     end
-    unreachable
+    i32.const 1
+    local.set $3
    end
-   i32.const 1
-   local.set $3
+   f64.const 1e-05
+   local.set $4
   end
   local.get $0
   f64.const 0
@@ -3360,19 +3366,19 @@
   if
    i32.const 12352
    i32.const 7920
-   i32.const 103
+   i32.const 104
    i32.const 5
    call $~lib/builtins/abort
    unreachable
   end
   local.get $1
-  local.tee $5
+  local.tee $6
   f64.const 0
   f64.le
   if
    i32.const 8000
    i32.const 7920
-   i32.const 106
+   i32.const 107
    i32.const 5
    call $~lib/builtins/abort
    unreachable
@@ -3383,7 +3389,7 @@
   if
    i32.const 8080
    i32.const 7920
-   i32.const 109
+   i32.const 110
    i32.const 5
    call $~lib/builtins/abort
    unreachable
@@ -3392,34 +3398,34 @@
   local.set $1
   loop $while-continue|0
    local.get $1
-   local.get $6
+   local.get $7
    f64.sub
-   f64.const 1e-05
+   local.get $4
    f64.gt
    if
-    local.get $6
+    local.get $7
     local.get $1
     f64.add
     f64.const 0.5
     f64.mul
-    local.tee $4
-    local.get $5
+    local.tee $5
+    local.get $6
     local.get $2
     local.get $3
     call $assembly/distribution/f/f2p
     local.get $0
     f64.lt
     if
-     local.get $4
+     local.get $5
      local.set $1
     else
-     local.get $4
-     local.set $6
+     local.get $5
+     local.set $7
     end
     br $while-continue|0
    end
   end
-  local.get $4
+  local.get $5
  )
  (func $assembly/distribution/t/t2p (param $0 f64) (param $1 f64) (param $2 i32) (result f64)
   (local $3 f64)
@@ -3574,22 +3580,25 @@
   local.get $2
   call $assembly/distribution/t/t2p
  )
- (func $assembly/distribution/t/p2t@varargs (param $0 f64) (param $1 f64) (param $2 i32) (result f64)
-  (local $3 f64)
+ (func $assembly/distribution/t/p2t@varargs (param $0 f64) (param $1 f64) (param $2 i32) (param $3 f64) (result f64)
   (local $4 f64)
   (local $5 f64)
-  block $1of1
-   block $0of1
-    block $outOfRange
-     global.get $~argumentsLength
-     i32.const 2
-     i32.sub
-     br_table $0of1 $1of1 $outOfRange
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 2
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
     end
-    unreachable
+    i32.const 1
+    local.set $2
    end
-   i32.const 1
-   local.set $2
+   f64.const 1e-05
+   local.set $3
   end
   local.get $0
   f64.const 0
@@ -3601,54 +3610,228 @@
   if
    i32.const 12352
    i32.const 12560
-   i32.const 95
+   i32.const 96
    i32.const 5
    call $~lib/builtins/abort
    unreachable
   end
   local.get $1
-  local.tee $4
   f64.const 0
   f64.le
   if
    i32.const 12448
    i32.const 12560
-   i32.const 98
+   i32.const 99
    i32.const 5
    call $~lib/builtins/abort
    unreachable
   end
-  f64.const 5
-  local.set $1
+  f64.const 1
+  local.set $4
   loop $while-continue|0
-   local.get $1
-   local.get $5
-   f64.sub
-   f64.const 1e-05
+   local.get $4
+   f64.abs
+   local.get $3
    f64.gt
    if
     local.get $5
+    local.get $5
     local.get $1
-    f64.add
-    f64.const 0.5
-    f64.mul
-    local.tee $3
-    local.get $4
     local.get $2
     call $assembly/distribution/t/t2p
+    local.tee $4
     local.get $0
-    f64.lt
-    if
-     local.get $3
-     local.set $1
-    else
-     local.get $3
-     local.set $5
-    end
+    f64.sub
+    local.get $5
+    local.get $3
+    f64.add
+    local.get $1
+    local.get $2
+    call $assembly/distribution/t/t2p
+    local.get $4
+    f64.sub
+    local.get $3
+    f64.div
+    f64.div
+    local.tee $4
+    f64.sub
+    local.set $5
     br $while-continue|0
    end
   end
-  local.get $3
+  local.get $5
+ )
+ (func $assembly/distribution/z/p2z (param $0 f64) (result f64)
+  (local $1 f64)
+  local.get $0
+  f64.const 0
+  f64.le
+  local.get $0
+  f64.const 1
+  f64.ge
+  i32.or
+  if
+   i32.const 12720
+   i32.const 12800
+   i32.const 9
+   i32.const 5
+   call $~lib/builtins/abort
+   unreachable
+  end
+  local.get $0
+  f64.const 0.02425
+  f64.lt
+  if (result f64)
+   local.get $0
+   call $~lib/math/NativeMath.log
+   f64.const -2
+   f64.mul
+   f64.sqrt
+   local.tee $0
+   f64.const -0.007784894002430293
+   f64.mul
+   f64.const -0.3223964580411365
+   f64.add
+   local.get $0
+   f64.mul
+   f64.const -2.400758277161838
+   f64.add
+   local.get $0
+   f64.mul
+   f64.const -2.549732539343734
+   f64.add
+   local.get $0
+   f64.mul
+   f64.const 4.374664141464968
+   f64.add
+   local.get $0
+   f64.mul
+   f64.const 2.938163982698783
+   f64.add
+   local.get $0
+   f64.const 0.007784695709041462
+   f64.mul
+   f64.const 0.3224671290700398
+   f64.add
+   local.get $0
+   f64.mul
+   f64.const 2.445134137142996
+   f64.add
+   local.get $0
+   f64.mul
+   f64.const 3.754408661907416
+   f64.add
+   local.get $0
+   f64.mul
+   f64.const 1
+   f64.add
+   f64.div
+  else
+   local.get $0
+   f64.const 0.97575
+   f64.le
+   if (result f64)
+    local.get $0
+    f64.const -0.5
+    f64.add
+    local.tee $1
+    local.get $1
+    f64.mul
+    local.tee $0
+    f64.const -39.69683028665376
+    f64.mul
+    f64.const 220.9460984245205
+    f64.add
+    local.get $0
+    f64.mul
+    f64.const -275.9285104469687
+    f64.add
+    local.get $0
+    f64.mul
+    f64.const 138.357751867269
+    f64.add
+    local.get $0
+    f64.mul
+    f64.const -30.66479806614716
+    f64.add
+    local.get $0
+    f64.mul
+    f64.const 2.506628277459239
+    f64.add
+    local.get $1
+    f64.mul
+    local.get $0
+    f64.const -54.47609879822406
+    f64.mul
+    f64.const 161.5858368580409
+    f64.add
+    local.get $0
+    f64.mul
+    f64.const -155.6989798598866
+    f64.add
+    local.get $0
+    f64.mul
+    f64.const 66.80131188771972
+    f64.add
+    local.get $0
+    f64.mul
+    f64.const -13.28068155288572
+    f64.add
+    local.get $0
+    f64.mul
+    f64.const 1
+    f64.add
+    f64.div
+   else
+    f64.const 1
+    local.get $0
+    f64.sub
+    call $~lib/math/NativeMath.log
+    f64.const -2
+    f64.mul
+    f64.sqrt
+    local.tee $0
+    f64.const -0.007784894002430293
+    f64.mul
+    f64.const -0.3223964580411365
+    f64.add
+    local.get $0
+    f64.mul
+    f64.const -2.400758277161838
+    f64.add
+    local.get $0
+    f64.mul
+    f64.const -2.549732539343734
+    f64.add
+    local.get $0
+    f64.mul
+    f64.const 4.374664141464968
+    f64.add
+    local.get $0
+    f64.mul
+    f64.const 2.938163982698783
+    f64.add
+    f64.neg
+    local.get $0
+    f64.const 0.007784695709041462
+    f64.mul
+    f64.const 0.3224671290700398
+    f64.add
+    local.get $0
+    f64.mul
+    f64.const 2.445134137142996
+    f64.add
+    local.get $0
+    f64.mul
+    f64.const 3.754408661907416
+    f64.add
+    local.get $0
+    f64.mul
+    f64.const 1
+    f64.add
+    f64.div
+   end
+  end
  )
  (func $assembly/distribution/z/z2p (param $0 f64) (result f64)
   (local $1 f64)
@@ -3701,57 +3884,6 @@
   f64.add
   f64.const 0.5
   f64.mul
- )
- (func $assembly/distribution/z/p2z (param $0 f64) (result f64)
-  (local $1 f64)
-  (local $2 f64)
-  (local $3 f64)
-  local.get $0
-  f64.const 0
-  f64.le
-  local.get $0
-  f64.const 1
-  f64.ge
-  i32.or
-  if
-   i32.const 12720
-   i32.const 12800
-   i32.const 9
-   i32.const 5
-   call $~lib/builtins/abort
-   unreachable
-  end
-  f64.const -5
-  local.set $2
-  f64.const 5
-  local.set $3
-  loop $while-continue|0
-   local.get $3
-   local.get $2
-   f64.sub
-   f64.const 1e-05
-   f64.gt
-   if
-    local.get $2
-    local.get $3
-    f64.add
-    f64.const 0.5
-    f64.mul
-    local.tee $1
-    call $assembly/distribution/z/z2p
-    local.get $0
-    f64.gt
-    if
-     local.get $1
-     local.set $3
-    else
-     local.get $1
-     local.set $2
-    end
-    br $while-continue|0
-   end
-  end
-  local.get $1
  )
  (func $~lib/rt/itcms/__pin (param $0 i32) (result i32)
   (local $1 i32)
