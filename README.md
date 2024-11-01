@@ -1,22 +1,26 @@
 # Introduction
 
-**PsychWasm** is a JavaScript/TypeScript library that provides APIs for mathematical and statistical calculations, especially for psychological and educational research. For use cases, please refer to my another project [PsychPen](https://github.com/LeafYeeXYZ/PsychPen).
+**PsychWasm** is a WebAssembly library that provides APIs for mathematical and statistical calculations, especially for psychological and educational research.
 
-`psych-wasm/as` provides basic functions directly using WebAssembly, while `psych-wasm/ts` provides advanced functions using WebAssembly and TypeScript. All functions can also be imported from `psych-wasm` directly.
+- PsychWasm can be used in all modern JavaScript/TypeScript environments, including browsers, Node.js, Deno, and Bun.
+- For use cases, please refer to my another project [PsychPen](https://github.com/LeafYeeXYZ/PsychPen).
+- If you are familiar with `wasmer`, you can also use `psych-wasm/as` in `Rust`、`Go`、`Python` and other languages (`.wasm` file can be found in `build` directory).
 
 **For full documentation, see [here](https://wasm.leafyee.xyz/).**
 
 - [Introduction](#introduction)
-- [Usage](#usage)
+- [Qiuck Start](#qiuck-start)
 - [Development](#development)
 
-# Usage
+# Qiuck Start
 
 Firstly, install `psych-wasm` via `npm`、`yarn`、`pnpm`、`deno` or `bun`. Note that if you are using `vite`, it is recommended to add `psych-wasm` (as well as other `WebAssembly` packages) to `optimizeDeps.exclude` in `vite.config.ts` to avoid some issues.
 
 ```bash
 bun add psych-wasm
 ```
+
+`psych-wasm/as` provides basic functions directly using WebAssembly, while `psych-wasm/ts` provides advanced functions using WebAssembly and TypeScript. All functions can also be imported from `psych-wasm` directly.
 
 ```typescript
 // Basic functions directly using WebAssembly
