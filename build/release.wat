@@ -1,7 +1,7 @@
 (module
- (type $0 (func (param i32) (result f64)))
- (type $1 (func (param i32)))
- (type $2 (func (param i32 i32) (result f64)))
+ (type $0 (func (param i32 i32) (result f64)))
+ (type $1 (func (param i32) (result f64)))
+ (type $2 (func (param i32)))
  (type $3 (func (param f64) (result f64)))
  (type $4 (func (param i32 i32) (result i32)))
  (type $5 (func))
@@ -243,8 +243,8 @@
  (export "ss" (func $export:assembly/base/ss))
  (export "_ss" (func $export:assembly/base/_ss))
  (export "sp" (func $export:assembly/base/sp))
- (export "vari" (func $export:assembly/base/vari))
- (export "std" (func $export:assembly/base/std))
+ (export "vari" (func $export:assembly/base/vari@varargs))
+ (export "std" (func $export:assembly/base/std@varargs))
  (export "min" (func $export:assembly/base/min))
  (export "max" (func $export:assembly/base/max))
  (export "sort" (func $export:assembly/base/sort@varargs))
@@ -4480,8 +4480,8 @@
   global.set $~lib/memory/__stack_pointer
   local.get $3
  )
- (func $assembly/base/vari (param $0 i32) (result f64)
-  (local $1 f64)
+ (func $assembly/base/vari (param $0 i32) (param $1 i32) (result f64)
+  (local $2 f64)
   global.get $~lib/memory/__stack_pointer
   i32.const 4
   i32.sub
@@ -4500,29 +4500,40 @@
   global.get $~lib/memory/__stack_pointer
   i32.const 0
   i32.store
+  local.get $1
+  if (result i32)
+   global.get $~lib/memory/__stack_pointer
+   local.get $0
+   i32.store
+   local.get $0
+   call $~lib/array/Array<f64>#get:length
+   i32.const 1
+   i32.sub
+  else
+   global.get $~lib/memory/__stack_pointer
+   local.get $0
+   i32.store
+   local.get $0
+   call $~lib/array/Array<f64>#get:length
+  end
+  local.set $1
   global.get $~lib/memory/__stack_pointer
   local.get $0
   i32.store
   local.get $0
   call $assembly/base/ss
-  local.set $1
-  global.get $~lib/memory/__stack_pointer
-  local.get $0
-  i32.store
   local.get $1
-  local.get $0
-  call $~lib/array/Array<f64>#get:length
   f64.convert_i32_s
   f64.div
-  local.set $1
+  local.set $2
   global.get $~lib/memory/__stack_pointer
   i32.const 4
   i32.add
   global.set $~lib/memory/__stack_pointer
-  local.get $1
+  local.get $2
  )
- (func $assembly/base/std (param $0 i32) (result f64)
-  (local $1 f64)
+ (func $assembly/base/std (param $0 i32) (param $1 i32) (result f64)
+  (local $2 f64)
   global.get $~lib/memory/__stack_pointer
   i32.const 4
   i32.sub
@@ -4545,14 +4556,15 @@
   local.get $0
   i32.store
   local.get $0
+  local.get $1
   call $assembly/base/vari
   f64.sqrt
-  local.set $1
+  local.set $2
   global.get $~lib/memory/__stack_pointer
   i32.const 4
   i32.add
   global.set $~lib/memory/__stack_pointer
-  local.get $1
+  local.get $2
  )
  (func $~lib/array/ensureCapacity (param $0 i32) (param $1 i32)
   (local $2 i32)
@@ -4601,7 +4613,7 @@
    global.get $~lib/memory/__stack_pointer
    local.get $0
    i32.store
-   block $__inlined_func$~lib/rt/itcms/__renew$203
+   block $__inlined_func$~lib/rt/itcms/__renew$205
     i32.const 1073741820
     local.get $2
     i32.const 1
@@ -4644,7 +4656,7 @@
      i32.store offset=16
      local.get $2
      local.set $1
-     br $__inlined_func$~lib/rt/itcms/__renew$203
+     br $__inlined_func$~lib/rt/itcms/__renew$205
     end
     local.get $3
     local.get $4
@@ -5552,6 +5564,7 @@
      local.get $5
      i32.store
      local.get $5
+     i32.const 1
      call $assembly/base/std
      local.set $10
      global.get $~lib/memory/__stack_pointer
@@ -5559,6 +5572,7 @@
      i32.store
      local.get $9
      local.get $6
+     i32.const 1
      call $assembly/base/std
      f64.mul
      local.get $10
@@ -6150,63 +6164,131 @@
   global.set $~lib/memory/__stack_pointer
   local.get $2
  )
- (func $export:assembly/base/vari (param $0 i32) (result f64)
-  (local $1 f64)
+ (func $export:assembly/base/vari@varargs (param $0 i32) (param $1 i32) (result f64)
+  (local $2 f64)
   global.get $~lib/memory/__stack_pointer
   i32.const 4
   i32.sub
   global.set $~lib/memory/__stack_pointer
-  global.get $~lib/memory/__stack_pointer
-  i32.const 13024
-  i32.lt_s
-  if
-   i32.const 45824
-   i32.const 45872
-   i32.const 1
-   i32.const 1
-   call $~lib/builtins/abort
-   unreachable
+  block $folding-inner0
+   global.get $~lib/memory/__stack_pointer
+   i32.const 13024
+   i32.lt_s
+   br_if $folding-inner0
+   global.get $~lib/memory/__stack_pointer
+   local.get $0
+   i32.store
+   global.get $~lib/memory/__stack_pointer
+   i32.const 4
+   i32.sub
+   global.set $~lib/memory/__stack_pointer
+   global.get $~lib/memory/__stack_pointer
+   i32.const 13024
+   i32.lt_s
+   br_if $folding-inner0
+   global.get $~lib/memory/__stack_pointer
+   i32.const 0
+   i32.store
+   block $1of1
+    block $0of1
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of1 $1of1 $outOfRange
+     end
+     unreachable
+    end
+    i32.const 1
+    local.set $1
+   end
+   global.get $~lib/memory/__stack_pointer
+   local.get $0
+   i32.store
+   local.get $0
+   local.get $1
+   call $assembly/base/vari
+   local.set $2
+   global.get $~lib/memory/__stack_pointer
+   i32.const 4
+   i32.add
+   global.set $~lib/memory/__stack_pointer
+   global.get $~lib/memory/__stack_pointer
+   i32.const 4
+   i32.add
+   global.set $~lib/memory/__stack_pointer
+   local.get $2
+   return
   end
-  global.get $~lib/memory/__stack_pointer
-  local.get $0
-  i32.store
-  local.get $0
-  call $assembly/base/vari
-  local.set $1
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.add
-  global.set $~lib/memory/__stack_pointer
-  local.get $1
+  i32.const 45824
+  i32.const 45872
+  i32.const 1
+  i32.const 1
+  call $~lib/builtins/abort
+  unreachable
  )
- (func $export:assembly/base/std (param $0 i32) (result f64)
-  (local $1 f64)
+ (func $export:assembly/base/std@varargs (param $0 i32) (param $1 i32) (result f64)
+  (local $2 f64)
   global.get $~lib/memory/__stack_pointer
   i32.const 4
   i32.sub
   global.set $~lib/memory/__stack_pointer
-  global.get $~lib/memory/__stack_pointer
-  i32.const 13024
-  i32.lt_s
-  if
-   i32.const 45824
-   i32.const 45872
-   i32.const 1
-   i32.const 1
-   call $~lib/builtins/abort
-   unreachable
+  block $folding-inner0
+   global.get $~lib/memory/__stack_pointer
+   i32.const 13024
+   i32.lt_s
+   br_if $folding-inner0
+   global.get $~lib/memory/__stack_pointer
+   local.get $0
+   i32.store
+   global.get $~lib/memory/__stack_pointer
+   i32.const 4
+   i32.sub
+   global.set $~lib/memory/__stack_pointer
+   global.get $~lib/memory/__stack_pointer
+   i32.const 13024
+   i32.lt_s
+   br_if $folding-inner0
+   global.get $~lib/memory/__stack_pointer
+   i32.const 0
+   i32.store
+   block $1of1
+    block $0of1
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of1 $1of1 $outOfRange
+     end
+     unreachable
+    end
+    i32.const 1
+    local.set $1
+   end
+   global.get $~lib/memory/__stack_pointer
+   local.get $0
+   i32.store
+   local.get $0
+   local.get $1
+   call $assembly/base/std
+   local.set $2
+   global.get $~lib/memory/__stack_pointer
+   i32.const 4
+   i32.add
+   global.set $~lib/memory/__stack_pointer
+   global.get $~lib/memory/__stack_pointer
+   i32.const 4
+   i32.add
+   global.set $~lib/memory/__stack_pointer
+   local.get $2
+   return
   end
-  global.get $~lib/memory/__stack_pointer
-  local.get $0
-  i32.store
-  local.get $0
-  call $assembly/base/std
-  local.set $1
-  global.get $~lib/memory/__stack_pointer
-  i32.const 4
-  i32.add
-  global.set $~lib/memory/__stack_pointer
-  local.get $1
+  i32.const 45824
+  i32.const 45872
+  i32.const 1
+  i32.const 1
+  call $~lib/builtins/abort
+  unreachable
  )
  (func $export:assembly/base/min (param $0 i32) (result f64)
   (local $1 f64)
@@ -6780,6 +6862,7 @@
    local.get $0
    i32.store
    local.get $0
+   i32.const 1
    call $assembly/base/std
    local.set $5
    loop $for-loop|0
@@ -6875,6 +6958,7 @@
    local.get $0
    i32.store
    local.get $0
+   i32.const 1
    call $assembly/base/std
    local.set $5
    loop $for-loop|0

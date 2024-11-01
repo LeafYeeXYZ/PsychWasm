@@ -35,15 +35,17 @@ export declare function sp(x: Array<number>, y: Array<number>): number;
 /**
  * assembly/base/vari
  * @param data `~lib/array/Array<f64>`
+ * @param sample `bool`
  * @returns `f64`
  */
-export declare function vari(data: Array<number>): number;
+export declare function vari(data: Array<number>, sample?: boolean): number;
 /**
  * assembly/base/std
  * @param data `~lib/array/Array<f64>`
+ * @param sample `bool`
  * @returns `f64`
  */
-export declare function std(data: Array<number>): number;
+export declare function std(data: Array<number>, sample?: boolean): number;
 /**
  * assembly/base/min
  * @param data `~lib/array/Array<f64>`

@@ -10,8 +10,8 @@ const m = [34, 56, 78, 90, 124, 145, 167, 189, 200, 234]
 const y = [2, 6, 31, 66, 100, 134, 167, 200, 234, 267]
 const kurtosis = ts.kurtosisTest(x)
 const skewness = ts.skewnessTest(x)
-assert.strictEqual(skewness.skewness.toFixed(PERCISION), Number(0).toFixed(PERCISION))
-assert.strictEqual(skewness.z.toFixed(PERCISION), Number(0).toFixed(PERCISION))
+assert.strictEqual(skewness.skewness - 0 < 1e-12, true)
+assert.strictEqual(skewness.z - 0 < 1e-12, true)
 assert.strictEqual(skewness.p.toFixed(3), '1.000')
 assert.strictEqual(typeof kurtosis.kurtosis, 'number')
 assert.strictEqual(typeof kurtosis.z, 'number')

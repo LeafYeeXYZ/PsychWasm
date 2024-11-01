@@ -59,15 +59,19 @@ async function instantiate(module, imports = {}) {
         __release(x);
       }
     },
-    vari(data) {
-      // assembly/base/vari(~lib/array/Array<f64>) => f64
+    vari(data, sample) {
+      // assembly/base/vari(~lib/array/Array<f64>, bool?) => f64
       data = __lowerArray(__setF64, 4, 3, data) || __notnull();
-      return exports.vari(data);
+      sample = sample ? 1 : 0;
+      exports.__setArgumentsLength(arguments.length);
+      return exports.vari(data, sample);
     },
-    std(data) {
-      // assembly/base/std(~lib/array/Array<f64>) => f64
+    std(data, sample) {
+      // assembly/base/std(~lib/array/Array<f64>, bool?) => f64
       data = __lowerArray(__setF64, 4, 3, data) || __notnull();
-      return exports.std(data);
+      sample = sample ? 1 : 0;
+      exports.__setArgumentsLength(arguments.length);
+      return exports.std(data, sample);
     },
     min(data) {
       // assembly/base/min(~lib/array/Array<f64>) => f64
